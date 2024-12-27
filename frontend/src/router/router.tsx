@@ -10,9 +10,10 @@ import {
   Outlet,
 } from "@tanstack/react-router";
 
-import { Home } from "@/pages/Home";
-import { NotFound } from "@/pages/NotFound";
-import { Start } from "@/pages/Start";
+import { Header } from "@/components/Header/Header";
+import { Dashboard } from "@/pages/Dashboard/Dashboard";
+import { Landing } from "@/pages/Landing/Landing";
+import { NotFound } from "@/pages/NotFound/NotFound";
 
 export const queryClient = new QueryClient({
   queryCache: new QueryCache({
@@ -25,27 +26,27 @@ export const queryClient = new QueryClient({
 const rootRoute = createRootRouteWithContext<{ query: QueryClient }>()({
   component: () => (
     <QueryClientProvider client={queryClient}>
+      <Header />
       <Outlet />
     </QueryClientProvider>
   ),
 });
 
-export const startPage = createRoute({
+export const landingPage = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
-  component: Start,
+  component: Landing,
 });
 
-export const homePage = createRoute({
+export const dashboardPage = createRoute({
   getParentRoute: () => rootRoute,
-  path: "home",
-  component: Home,
-
+  path: "dashboard",
+  component: Dashboard,
   //Example how to use lazy routing
   // component: lazyRouteComponent(() => import("@pages/Home")),
 });
 
-const routeTree = rootRoute.addChildren([startPage, homePage]);
+const routeTree = rootRoute.addChildren([landingPage, dashboardPage]);
 
 export const router = createRouter({
   routeTree,
