@@ -12,6 +12,7 @@
     "verify": "eslint"
   },
   "dependencies": {
+    "@radix-ui/react-avatar": "^1.1.2",
     "@radix-ui/react-slot": "^1.1.1",
     "@tanstack/react-query": "^5.62.11",
     "@tanstack/react-router": "^1.92.6",

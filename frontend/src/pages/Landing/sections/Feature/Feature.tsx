@@ -1,7 +1,7 @@
 import { features } from "@/constants/features";
 import { FeatureType } from "@/types/general";
 
-import { FeatureCard } from "./components/FeatureCard";
+import { LandingCard } from "../../components/LandingCard";
 
 export const Feature = () => {
   return (
@@ -12,7 +12,7 @@ export const Feature = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature: FeatureType, index: number) => (
-            <FeatureCard key={index} feature={feature} />
+            <LandingCard key={index} type="feature" prop={feature} />
           ))}
         </div>
       </div>

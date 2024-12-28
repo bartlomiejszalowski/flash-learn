@@ -15,7 +15,7 @@ export const Hero = () => {
       </p>
       <div className="space-x-4">
         <Button asChild size="lg">
-          <Link href="/signup">Start Learning for Free</Link>
+          <Link href="/dashboard">Start Learning for Free</Link>
         </Button>
         <Button asChild variant="outline" size="lg">
           <Link href="/demo">Watch Demo</Link>
