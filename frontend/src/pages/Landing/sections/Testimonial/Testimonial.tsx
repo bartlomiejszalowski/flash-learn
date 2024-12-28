@@ -1,6 +1,6 @@
 import { testimonials } from "@/constants/testimonials";
 
-import { LandingCard } from "../../components/LandingCard";
+import { CustomCard } from "../../components/CustomCard";
 
 export const Testimonial = () => {
   return (
@@ -11,7 +11,7 @@ export const Testimonial = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <LandingCard key={index} type="testimonial" prop={testimonial} />
+            <CustomCard key={index} type="testimonial" prop={testimonial} />
           ))}
         </div>
       </div>
