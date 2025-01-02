@@ -3,6 +3,7 @@ import { Trophy, Users } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+import { LearningEffectiveness } from "./components/LearningEffectiveness/LearningEffectiveness";
 import { QuickStartLearning } from "./components/QuickStartLearning/QuickStartLearning";
 
 export const Dashboard = () => {
@@ -49,7 +50,7 @@ export const Dashboard = () => {
           </Card>
         </div>
 
-        {/* <LearningEffectiveness /> */}
+        <LearningEffectiveness />
 
         <Tabs defaultValue="available-collections" className="space-y-4">
           <TabsList>

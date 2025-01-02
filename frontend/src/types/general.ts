@@ -10,3 +10,9 @@ export type TestimonialType = {
   role: string;
   content: string;
 };
+
+export type LearningEffectivenessItemType = {
+  Icon: JSX.Element;
+  label: string;
+  description: string;
+};
