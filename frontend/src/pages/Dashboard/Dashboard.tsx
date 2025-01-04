@@ -3,6 +3,7 @@ import { Trophy, Users } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+import { AvailableCollectionsList } from "./components/AvailableCollectionList/AvailableCollectionsList";
 import { LearningEffectiveness } from "./components/LearningEffectiveness/LearningEffectiveness";
 import { QuickStartLearning } from "./components/QuickStartLearning/QuickStartLearning";
 
@@ -65,7 +66,7 @@ export const Dashboard = () => {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold">Dostępne kolekcje</h2>
             </div>
-            {/* <AvailableCollectionsList /> */}
+            <AvailableCollectionsList />
           </TabsContent>
           <TabsContent value="my-collections">
             <div className="flex justify-between items-center mb-4">

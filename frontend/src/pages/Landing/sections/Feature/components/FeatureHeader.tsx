@@ -1,3 +1,4 @@
+import { CustomCardHeader } from "@/pages/Landing/components/CustomCard/CustomCardHeader";
 import { FeatureType } from "@/types/general";
 
 type Props = {
@@ -6,9 +7,9 @@ type Props = {
 
 export const FeatureHeader: React.FC<Props> = ({ feature }) => {
   return (
-    <div className="flex flex-row">
-      {feature.icon}
-      <span className="ml-2">{feature.title}</span>
-    </div>
+    <CustomCardHeader
+      Icon={feature.Icon}
+      children={<span className="ml-2">{feature.title}</span>}
+    />
   );
 };

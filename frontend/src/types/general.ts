@@ -1,5 +1,5 @@
 export type FeatureType = {
-  icon: JSX.Element;
+  Icon: JSX.Element;
   title: string;
   description: string;
 };
@@ -15,4 +15,11 @@ export type LearningEffectivenessItemType = {
   Icon: JSX.Element;
   label: string;
   description: string;
+};
+
+export type AvaiableCollectionType = {
+  id: string;
+  name: string;
+  Icon: JSX.Element;
+  cardCount: number;
 };

@@ -1,6 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { customCardCreator } from "@/creators/customCardCreator";
-import { FeatureType, TestimonialType } from "@/types/general";
+import {
+  AvaiableCollectionType,
+  FeatureType,
+  TestimonialType,
+} from "@/types/general";
 
 type Props = {
   //stworzyc tutaj typ
@@ -8,8 +12,9 @@ type Props = {
     | "feature"
     | "testimonial"
     | "quickStartLearning"
-    | "learningEffectiveness";
-  prop?: FeatureType | TestimonialType;
+    | "learningEffectiveness"
+    | "avaiableCollection";
+  prop?: FeatureType | TestimonialType | AvaiableCollectionType;
 };
 
 export const CustomCard: React.FC<Props> = ({ type, prop }) => {
@@ -17,9 +22,7 @@ export const CustomCard: React.FC<Props> = ({ type, prop }) => {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>{header}</CardTitle>
-      </CardHeader>
+      <CardHeader>{header}</CardHeader>
       <CardContent>{body}</CardContent>
     </Card>
   );
