@@ -23,3 +23,22 @@ export type AvaiableCollectionType = {
   Icon: JSX.Element;
   cardCount: number;
 };
+
+export type CollectionType = {
+  id: string;
+  name: string;
+  cardCount: number;
+};
+
+export type LeaderboardType = {
+  rank: number;
+  name: string;
+  points: number;
+  avatar: string;
+};
+
+export type NewUserType = {
+  name: string;
+  joinedDate: string;
+  avatar: string;
+};

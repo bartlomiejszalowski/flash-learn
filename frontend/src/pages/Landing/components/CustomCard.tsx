@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { customCardCreator } from "@/creators/customCardCreator";
 import {
   AvaiableCollectionType,
+  CollectionType,
   FeatureType,
   TestimonialType,
 } from "@/types/general";
@@ -13,8 +14,13 @@ type Props = {
     | "testimonial"
     | "quickStartLearning"
     | "learningEffectiveness"
-    | "avaiableCollection";
-  prop?: FeatureType | TestimonialType | AvaiableCollectionType;
+    | "avaiableCollection"
+    | "collectionList";
+  prop?:
+    | FeatureType
+    | TestimonialType
+    | AvaiableCollectionType
+    | CollectionType;
 };
 
 export const CustomCard: React.FC<Props> = ({ type, prop }) => {

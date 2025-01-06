@@ -1,27 +1,32 @@
 import { Trophy, Users } from "lucide-react";
+import { useState } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { AvailableCollectionsList } from "./components/AvailableCollectionList/AvailableCollectionsList";
+import { CollectionsList } from "./components/CollectionsList/CollectionsList";
+import { CreateCollectionDialog } from "./components/CreateCollectionDialog/CreateCollectionDialog";
+import { LeaderboardTable } from "./components/LeaderboardTable/LeaderboardTable";
 import { LearningEffectiveness } from "./components/LearningEffectiveness/LearningEffectiveness";
+import NewUsersTable from "./components/NewUsersTable.tsx/NewUsersTable";
 import { QuickStartLearning } from "./components/QuickStartLearning/QuickStartLearning";
 
 export const Dashboard = () => {
-  // const [collections, setCollections] = useState([
-  //   { id: "1", name: "Podstawowe słownictwo", cardCount: 50 },
-  //   { id: "2", name: "Czasowniki nieregularne", cardCount: 30 },
-  //   { id: "3", name: "Idiomy", cardCount: 25 },
-  // ]);
+  const [collections, setCollections] = useState([
+    { id: "1", name: "Podstawowe słownictwo", cardCount: 50 },
+    { id: "2", name: "Czasowniki nieregularne", cardCount: 30 },
+    { id: "3", name: "Idiomy", cardCount: 25 },
+  ]);
 
-  // const addCollection = (name: string) => {
-  //   const newCollection = {
-  //     id: (collections.length + 1).toString(),
-  //     name,
-  //     cardCount: 0,
-  //   };
-  //   setCollections([...collections, newCollection]);
-  // };
+  const addCollection = (name: string) => {
+    const newCollection = {
+      id: (collections.length + 1).toString(),
+      name,
+      cardCount: 0,
+    };
+    setCollections([...collections, newCollection]);
+  };
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <main className="container mx-auto px-4 py-8">
@@ -71,17 +76,17 @@ export const Dashboard = () => {
           <TabsContent value="my-collections">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold">Moje kolekcje</h2>
-              {/* <CreateCollectionDialog onCreateCollection={addCollection} /> */}
+              <CreateCollectionDialog onCreateCollection={addCollection} />
             </div>
-            {/* <CollectionsList collections={collections} /> */}
+            <CollectionsList collections={collections} />
           </TabsContent>
           <TabsContent value="leaderboard">
             <h2 className="text-2xl font-bold mb-4">Tablica liderów</h2>
-            {/* <LeaderboardTable /> */}
+            <LeaderboardTable />
           </TabsContent>
           <TabsContent value="new-users">
             <h2 className="text-2xl font-bold mb-4">Nowi użytkownicy</h2>
-            {/* <NewUsersTable /> */}
+            <NewUsersTable />
           </TabsContent>
         </Tabs>
       </main>

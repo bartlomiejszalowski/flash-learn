@@ -1,5 +1,7 @@
 import { AvaiableCollectionListBody } from "@/pages/Dashboard/components/AvailableCollectionList/components/AvaiableCollectionListBody";
 import { AvaiableCollectionListHeader } from "@/pages/Dashboard/components/AvailableCollectionList/components/AvaiableCollectionListHeader";
+import { CollectionListBody } from "@/pages/Dashboard/components/CollectionsList/components/CollectionListBody";
+import { CollectionsListHeader } from "@/pages/Dashboard/components/CollectionsList/components/CollectionsListHeader";
 import { LearningEffectivenessBody } from "@/pages/Dashboard/components/LearningEffectiveness/components/LearningEffectivenessBody";
 import { LearningEffectivenessHeader } from "@/pages/Dashboard/components/LearningEffectiveness/components/LearningEffectivenessHeader";
 import { QuickStartLearningBody } from "@/pages/Dashboard/components/QuickStartLearning/components/QuickSartLearningBody";
@@ -10,6 +12,7 @@ import { TestimonialBody } from "@/pages/Landing/sections/Testimonial/components
 import { TestimonialHeader } from "@/pages/Landing/sections/Testimonial/components/TestimonialHeader";
 import {
   AvaiableCollectionType,
+  CollectionType,
   FeatureType,
   LearningEffectivenessItemType,
   TestimonialType,
@@ -22,6 +25,7 @@ export const customCardCreator = (
     | TestimonialType
     | LearningEffectivenessItemType
     | AvaiableCollectionType
+    | CollectionType
 ) => {
   let header;
   let body;
@@ -59,6 +63,12 @@ export const customCardCreator = (
         <AvaiableCollectionListBody
           cardCount={(prop as AvaiableCollectionType).cardCount}
         />
+      );
+      break;
+    case "collectionList":
+      header = <CollectionsListHeader name={(prop as CollectionType).name} />;
+      body = (
+        <CollectionListBody cardCount={(prop as CollectionType).cardCount} />
       );
       break;
     default:
