@@ -1,6 +1,6 @@
+import { LeaderboardType, NewUserType } from "@/@Types/general";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TableCell, TableRow } from "@/components/ui/table";
-import { LeaderboardType, NewUserType } from "@/types/general";
 
 interface Props {
   key: number | string;

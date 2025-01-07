@@ -1,3 +1,12 @@
+import {
+  AvaiableCollectionType,
+  CollectionType,
+  FeatureType,
+  LearningEffectivenessItemType,
+  TestimonialType,
+} from "@/@Types/general";
+import { ActiveUsersBody } from "@/pages/Dashboard/components/ActiveUsersCard/components/ActiveUsersBody";
+import { ActiveUsersHeader } from "@/pages/Dashboard/components/ActiveUsersCard/components/ActiveUsersHeader";
 import { AvaiableCollectionListBody } from "@/pages/Dashboard/components/AvailableCollectionList/components/AvaiableCollectionListBody";
 import { AvaiableCollectionListHeader } from "@/pages/Dashboard/components/AvailableCollectionList/components/AvaiableCollectionListHeader";
 import { CollectionListBody } from "@/pages/Dashboard/components/CollectionsList/components/CollectionListBody";
@@ -6,17 +15,12 @@ import { LearningEffectivenessBody } from "@/pages/Dashboard/components/Learning
 import { LearningEffectivenessHeader } from "@/pages/Dashboard/components/LearningEffectiveness/components/LearningEffectivenessHeader";
 import { QuickStartLearningBody } from "@/pages/Dashboard/components/QuickStartLearning/components/QuickSartLearningBody";
 import { QuickStartHeader } from "@/pages/Dashboard/components/QuickStartLearning/components/QuickStartHeader";
+import { ScoreCardBody } from "@/pages/Dashboard/components/ScoreCard/components/ScoreCardBody";
+import { ScoreCardHeader } from "@/pages/Dashboard/components/ScoreCard/components/ScoreCardHeader";
 import { FeatureBody } from "@/pages/Landing/sections/Feature/components/FeatureBody";
 import { FeatureHeader } from "@/pages/Landing/sections/Feature/components/FeatureHeader";
 import { TestimonialBody } from "@/pages/Landing/sections/Testimonial/components/TestimonialBody";
 import { TestimonialHeader } from "@/pages/Landing/sections/Testimonial/components/TestimonialHeader";
-import {
-  AvaiableCollectionType,
-  CollectionType,
-  FeatureType,
-  LearningEffectivenessItemType,
-  TestimonialType,
-} from "@/types/general";
 
 export const customCardCreator = (
   type: string,
@@ -70,6 +74,14 @@ export const customCardCreator = (
       body = (
         <CollectionListBody cardCount={(prop as CollectionType).cardCount} />
       );
+      break;
+    case "scoreCard":
+      header = <ScoreCardHeader />;
+      body = <ScoreCardBody />;
+      break;
+    case "activeUsersCard":
+      header = <ActiveUsersHeader />;
+      body = <ActiveUsersBody />;
       break;
     default:
       throw new Error(`Unsupported type: ${type}`);

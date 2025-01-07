@@ -1,5 +1,5 @@
-import { CustomCardHeader } from "@/pages/Landing/components/CustomCard/CustomCardHeader";
-import { FeatureType } from "@/types/general";
+import { FeatureType } from "@/@Types/general";
+import { CustomCardHeader } from "@/components/CustomCard/CustomCardHeader";
 
 type Props = {
   feature: FeatureType;

@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router";
 
+import { AvaiableCollectionType } from "@/@Types/general";
+import { CustomCard } from "@/components/CustomCard/CustomCard";
 import { availableCollections } from "@/constants/avaiableCollections";
-import { CustomCard } from "@/pages/Landing/components/CustomCard";
-import { AvaiableCollectionType } from "@/types/general";
 
 import { AvaiableCollectionListInfo } from "./components/AvaiableCollectionListInfo";
 
@@ -13,7 +13,6 @@ export const AvailableCollectionsList = () => {
         {availableCollections.map((collection: AvaiableCollectionType) => (
           <Link href={`/collection/${collection.id}`} key={collection.id}>
             <div className="hover:shadow-lg transition-shadow">
-              //make card smaller and square and add more icons
               <CustomCard type="avaiableCollection" prop={collection} />
             </div>
           </Link>

@@ -1,6 +1,6 @@
 import { testimonials } from "@/constants/testimonials";
 
-import { CustomCard } from "../../components/CustomCard";
+import { CustomCard } from "../../../../components/CustomCard/CustomCard";
 
 export const Testimonial = () => {
   return (

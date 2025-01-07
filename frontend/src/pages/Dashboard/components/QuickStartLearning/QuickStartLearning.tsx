@@ -1,4 +1,4 @@
-import { CustomCard } from "@/pages/Landing/components/CustomCard";
+import { CustomCard } from "@/components/CustomCard/CustomCard";
 
 export const QuickStartLearning = () => {
   return <CustomCard type="quickStartLearning" />;

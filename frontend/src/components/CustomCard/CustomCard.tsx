@@ -1,11 +1,11 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { customCardCreator } from "@/creators/customCardCreator";
 import {
   AvaiableCollectionType,
   CollectionType,
   FeatureType,
   TestimonialType,
-} from "@/types/general";
+} from "@/@Types/general";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { customCardCreator } from "@/creators/customCardCreator";
 
 type Props = {
   //stworzyc tutaj typ
@@ -15,7 +15,9 @@ type Props = {
     | "quickStartLearning"
     | "learningEffectiveness"
     | "avaiableCollection"
-    | "collectionList";
+    | "collectionList"
+    | "scoreCard"
+    | "activeUsersCard";
   prop?:
     | FeatureType
     | TestimonialType

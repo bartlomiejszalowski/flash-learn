@@ -1,6 +1,6 @@
 import { Zap } from "lucide-react";
 
-import { CustomCardHeader } from "@/pages/Landing/components/CustomCard/CustomCardHeader";
+import { CustomCardHeader } from "@/components/CustomCard/CustomCardHeader";
 
 export const QuickStartHeader = () => {
   return (

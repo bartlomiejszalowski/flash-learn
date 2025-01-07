@@ -1,7 +1,7 @@
 import { features } from "@/constants/features";
 import { FeatureType } from "@/types/general";
 
-import { CustomCard } from "../../components/CustomCard";
+import { CustomCard } from "../../../../components/CustomCard/CustomCard";
 
 export const Feature = () => {
   return (

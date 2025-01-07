@@ -1,5 +1,5 @@
-import { CustomCardHeader } from "@/pages/Landing/components/CustomCard/CustomCardHeader";
-import { AvaiableCollectionType } from "@/types/general";
+import { AvaiableCollectionType } from "@/@Types/general";
+import { CustomCardHeader } from "@/components/CustomCard/CustomCardHeader";
 
 type Props = {
   avaiableCollection: AvaiableCollectionType;

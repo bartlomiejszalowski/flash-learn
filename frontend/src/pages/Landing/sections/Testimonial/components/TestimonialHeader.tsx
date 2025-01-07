@@ -1,6 +1,6 @@
+import { TestimonialType } from "@/@Types/general";
+import { CustomCardHeader } from "@/components/CustomCard/CustomCardHeader";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { CustomCardHeader } from "@/pages/Landing/components/CustomCard/CustomCardHeader";
-import { TestimonialType } from "@/types/general";
 
 type Props = {
   testimonial: TestimonialType;

@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 
-import { CustomCard } from "@/pages/Landing/components/CustomCard";
-import { CollectionType } from "@/types/general";
+import { CollectionType } from "@/@Types/general";
+import { CustomCard } from "@/components/CustomCard/CustomCard";
 
 interface Props {
   collections: CollectionType[];
