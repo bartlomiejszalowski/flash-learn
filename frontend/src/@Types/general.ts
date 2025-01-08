@@ -17,11 +17,18 @@ export type LearningEffectivenessItemType = {
   description: string;
 };
 
+export type VocabularyType = {
+  word: string;
+  translation: string;
+};
+
 export type AvaiableCollectionType = {
   id: string;
   name: string;
   Icon: JSX.Element;
   cardCount: number;
+  description: string;
+  vocabulary: VocabularyType[];
 };
 
 export type CollectionType = {

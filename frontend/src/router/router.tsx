@@ -11,6 +11,7 @@ import {
 } from "@tanstack/react-router";
 
 import { Header } from "@/components/Header/Header";
+import { Collection } from "@/pages/Collection/Collection";
 import { Dashboard } from "@/pages/Dashboard/Dashboard";
 import { Landing } from "@/pages/Landing/Landing";
 import { NotFound } from "@/pages/NotFound/NotFound";
@@ -46,7 +47,17 @@ export const dashboardPage = createRoute({
   // component: lazyRouteComponent(() => import("@pages/Home")),
 });
 
-const routeTree = rootRoute.addChildren([landingPage, dashboardPage]);
+export const collectionPage = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "collections/$collectionId", // :collectionId is a dynamic parameter
+  component: Collection,
+});
+
+const routeTree = rootRoute.addChildren([
+  landingPage,
+  dashboardPage,
+  collectionPage,
+]);
 
 export const router = createRouter({
   routeTree,

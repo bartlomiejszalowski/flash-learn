@@ -17,7 +17,8 @@ type Props = {
     | "avaiableCollection"
     | "collectionList"
     | "scoreCard"
-    | "activeUsersCard";
+    | "activeUsersCard"
+    | "collectionProgress";
   prop?:
     | FeatureType
     | TestimonialType

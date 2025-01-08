@@ -11,7 +11,7 @@ export const AvailableCollectionsList = () => {
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {availableCollections.map((collection: AvaiableCollectionType) => (
-          <Link href={`/collection/${collection.id}`} key={collection.id}>
+          <Link href={`/collections/${collection.id}`} key={collection.id}>
             <div className="hover:shadow-lg transition-shadow">
               <CustomCard type="avaiableCollection" prop={collection} />
             </div>

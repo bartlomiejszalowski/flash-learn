@@ -5,6 +5,8 @@ import {
   LearningEffectivenessItemType,
   TestimonialType,
 } from "@/@Types/general";
+import { CollectionProgressBody } from "@/pages/Collection/components/CollectionProgress/components/CollectionProgressBody";
+import { CollectionProgressHeader } from "@/pages/Collection/components/CollectionProgress/components/CollectionProgressHeader";
 import { ActiveUsersBody } from "@/pages/Dashboard/components/ActiveUsersCard/components/ActiveUsersBody";
 import { ActiveUsersHeader } from "@/pages/Dashboard/components/ActiveUsersCard/components/ActiveUsersHeader";
 import { AvaiableCollectionListBody } from "@/pages/Dashboard/components/AvailableCollectionList/components/AvaiableCollectionListBody";
@@ -82,6 +84,18 @@ export const customCardCreator = (
     case "activeUsersCard":
       header = <ActiveUsersHeader />;
       body = <ActiveUsersBody />;
+      break;
+    case "collectionProgress":
+      header = (
+        <CollectionProgressHeader
+          name={(prop as AvaiableCollectionType).name}
+        />
+      );
+      body = (
+        <CollectionProgressBody
+          description={(prop as AvaiableCollectionType).description}
+        />
+      );
       break;
     default:
       throw new Error(`Unsupported type: ${type}`);
