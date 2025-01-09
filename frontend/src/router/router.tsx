@@ -14,6 +14,7 @@ import { Header } from "@/components/Header/Header";
 import { Collection } from "@/pages/Collection/Collection";
 import { Dashboard } from "@/pages/Dashboard/Dashboard";
 import { Landing } from "@/pages/Landing/Landing";
+import { Learn } from "@/pages/Learn/Learn";
 import { NotFound } from "@/pages/NotFound/NotFound";
 
 export const queryClient = new QueryClient({
@@ -47,16 +48,27 @@ export const dashboardPage = createRoute({
   // component: lazyRouteComponent(() => import("@pages/Home")),
 });
 
-export const collectionPage = createRoute({
+export const collectionsPage = createRoute({
   getParentRoute: () => rootRoute,
-  path: "collections/$collectionId", // :collectionId is a dynamic parameter
+  path: "collections",
+});
+
+export const collectionPage = createRoute({
+  getParentRoute: () => collectionsPage,
+  path: "$collectionId", // :collectionId is a dynamic parameter
   component: Collection,
+});
+
+export const learnPage = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "collections/$collectionId/learn", // Matches /collections/$collectionId/learn
+  component: Learn,
 });
 
 const routeTree = rootRoute.addChildren([
   landingPage,
   dashboardPage,
-  collectionPage,
+  collectionsPage.addChildren([collectionPage.addChildren([learnPage])]),
 ]);
 
 export const router = createRouter({

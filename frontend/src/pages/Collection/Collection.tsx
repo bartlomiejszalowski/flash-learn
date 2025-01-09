@@ -19,7 +19,7 @@ export const Collection = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-8">
       <CollectionProgress collection={collection} />
-      <StartLearning />
+      <StartLearning collection={collection} />
       <VocabularyTable vocabulary={collection.vocabulary} />
     </div>
   );
