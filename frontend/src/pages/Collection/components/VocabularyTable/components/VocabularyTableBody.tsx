@@ -12,9 +12,9 @@ export const VocabularyTableBody: React.FC<Props> = ({ vocabulary }) => {
     <TableBody>
       {vocabulary.map((item) => (
         <TableRow key={item.word}>
-          <TableCell>{item.word}</TableCell>
-          <TableCell>{item.translation}</TableCell>
-          <TableCell className="flex justify-end w-full">
+          <TableCell className="border-r-2 ">{item.word}</TableCell>
+          <TableCell className="border-r-2 ">{item.translation}</TableCell>
+          <TableCell className="flex justify-end w-full ">
             {item.word.length > 5 ? (
               <CheckCircle className="h-5 w-5 text-green-500" />
             ) : (

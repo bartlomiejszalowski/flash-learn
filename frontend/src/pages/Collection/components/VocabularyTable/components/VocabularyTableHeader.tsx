@@ -4,8 +4,8 @@ export const VocabularyTableHeader = () => {
   return (
     <TableHeader>
       <TableRow>
-        <TableHead>Polski </TableHead>
-        <TableHead>Angielski</TableHead>
+        <TableHead className="border-r-2">Angielski</TableHead>
+        <TableHead className="border-r-2">Polski </TableHead>
         <TableHead className="text-right">Poziom Trudnośći</TableHead>
       </TableRow>
     </TableHeader>
