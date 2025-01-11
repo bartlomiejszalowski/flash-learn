@@ -17,7 +17,7 @@ export const DashboardTabs: React.FC<Props> = ({
   collections,
 }) => {
   return (
-    <Tabs defaultValue="available-collections" className="space-y-4">
+    <Tabs defaultValue="available-collections" className="space-y-4 pt-4">
       <TabsTriggers />
 
       {/* available collections */}

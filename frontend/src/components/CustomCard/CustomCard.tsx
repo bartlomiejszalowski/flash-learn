@@ -18,7 +18,8 @@ type Props = {
     | "collectionList"
     | "scoreCard"
     | "activeUsersCard"
-    | "collectionProgress";
+    | "collectionProgress"
+    | "learnProgress";
   prop?:
     | FeatureType
     | TestimonialType
@@ -31,7 +32,7 @@ export const CustomCard: React.FC<Props> = ({ type, prop }) => {
 
   return (
     <Card>
-      <CardHeader>{header}</CardHeader>
+      {header && <CardHeader>{header}</CardHeader>}
       <CardContent>{body}</CardContent>
     </Card>
   );

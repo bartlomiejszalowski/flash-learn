@@ -49,3 +49,12 @@ export type NewUserType = {
   joinedDate: string;
   avatar: string;
 };
+
+export type LearningMode = {
+  id: number;
+  name: string;
+  description: string;
+  icon: React.ReactNode;
+  completed: boolean;
+  points: number;
+};

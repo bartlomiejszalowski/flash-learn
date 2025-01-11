@@ -23,6 +23,7 @@ import { FeatureBody } from "@/pages/Landing/sections/Feature/components/Feature
 import { FeatureHeader } from "@/pages/Landing/sections/Feature/components/FeatureHeader";
 import { TestimonialBody } from "@/pages/Landing/sections/Testimonial/components/TestimonialBody";
 import { TestimonialHeader } from "@/pages/Landing/sections/Testimonial/components/TestimonialHeader";
+import { LearnProgressCardBody } from "@/pages/Learn/components/LearnProgressCard/components/LearnProgressCardBody";
 
 export const customCardCreator = (
   type: string,
@@ -96,6 +97,9 @@ export const customCardCreator = (
           description={(prop as AvaiableCollectionType).description}
         />
       );
+      break;
+    case "learnProgress":
+      body = <LearnProgressCardBody />;
       break;
     default:
       throw new Error(`Unsupported type: ${type}`);
