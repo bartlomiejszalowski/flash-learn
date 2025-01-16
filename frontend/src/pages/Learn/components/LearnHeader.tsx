@@ -9,7 +9,9 @@ interface Props {
 export const LearnHeader: React.FC<Props> = ({ collectionName }) => {
   return (
     <div className="flex justify-between items-center mb-6">
-      <h1 className="text-3xl font-bold">{collectionName} - Tryby nauki</h1>
+      <h1 className="text-3xl font-bold">
+        {collectionName} - <br /> Tryby nauki
+      </h1>
       <div className="flex items-center space-x-4">
         <div className="text-right">
           <p className="text-sm font-medium">Jan Kowalski</p>

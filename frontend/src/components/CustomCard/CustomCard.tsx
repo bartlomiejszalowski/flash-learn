@@ -2,6 +2,7 @@ import {
   AvaiableCollectionType,
   CollectionType,
   FeatureType,
+  LearningMode,
   TestimonialType,
 } from "@/@Types/general";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -19,12 +20,15 @@ type Props = {
     | "scoreCard"
     | "activeUsersCard"
     | "collectionProgress"
-    | "learnProgress";
+    | "learnProgress"
+    | "learningMode"
+    | "learningEfficiency";
   prop?:
     | FeatureType
     | TestimonialType
     | AvaiableCollectionType
-    | CollectionType;
+    | CollectionType
+    | LearningMode;
 };
 
 export const CustomCard: React.FC<Props> = ({ type, prop }) => {

@@ -3,6 +3,7 @@ import {
   CollectionType,
   FeatureType,
   LearningEffectivenessItemType,
+  LearningMode,
   TestimonialType,
 } from "@/@Types/general";
 import { CollectionProgressBody } from "@/pages/Collection/components/CollectionProgress/components/CollectionProgressBody";
@@ -23,6 +24,9 @@ import { FeatureBody } from "@/pages/Landing/sections/Feature/components/Feature
 import { FeatureHeader } from "@/pages/Landing/sections/Feature/components/FeatureHeader";
 import { TestimonialBody } from "@/pages/Landing/sections/Testimonial/components/TestimonialBody";
 import { TestimonialHeader } from "@/pages/Landing/sections/Testimonial/components/TestimonialHeader";
+import { LearningEfficiencyBody } from "@/pages/Learn/components/LearningEfficiency/components/LearningEfficiencyBody";
+import { LearnModeCardBody } from "@/pages/Learn/components/LearnModeCard/components/LearnModeCardBody";
+import { LearnModeCardHeader } from "@/pages/Learn/components/LearnModeCard/components/LearnModeCardHeader";
 import { LearnProgressCardBody } from "@/pages/Learn/components/LearnProgressCard/components/LearnProgressCardBody";
 
 export const customCardCreator = (
@@ -33,6 +37,7 @@ export const customCardCreator = (
     | LearningEffectivenessItemType
     | AvaiableCollectionType
     | CollectionType
+    | LearningMode
 ) => {
   let header;
   let body;
@@ -100,6 +105,15 @@ export const customCardCreator = (
       break;
     case "learnProgress":
       body = <LearnProgressCardBody />;
+      break;
+    case "learningMode":
+      header = <LearnModeCardHeader mode={prop as LearningMode} />;
+      body = (
+        <LearnModeCardBody description={(prop as LearningMode).description} />
+      );
+      break;
+    case "learningEfficiency":
+      body = <LearningEfficiencyBody />;
       break;
     default:
       throw new Error(`Unsupported type: ${type}`);

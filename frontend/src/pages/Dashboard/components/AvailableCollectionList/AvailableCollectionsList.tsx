@@ -14,6 +14,7 @@ export const AvailableCollectionsList = () => {
           <Link
             to="/collections/$collectionId"
             params={{ collectionId: collection.id }}
+            key={collection.id}
           >
             <div className="hover:shadow-lg transition-shadow">
               <CustomCard type="avaiableCollection" prop={collection} />

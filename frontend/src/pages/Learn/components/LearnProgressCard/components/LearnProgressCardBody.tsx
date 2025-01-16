@@ -1,4 +1,4 @@
-import { Progress } from "@radix-ui/react-progress";
+import { Progress } from "@/components/ui/progress";
 
 export const LearnProgressCardBody = () => {
   return (
