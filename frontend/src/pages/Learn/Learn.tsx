@@ -1,15 +1,15 @@
 import { useParams } from "@tanstack/react-router";
+import { RotateCcw } from "lucide-react";
 
 import { AvaiableCollectionType, LearningMode } from "@/@Types/general";
+import { Button } from "@/components/ui/button";
 import { availableCollections } from "@/constants/avaiableCollections";
 import { learningModes } from "@/constants/learningMode";
 
 import { LearnHeader } from "./components/LearnHeader";
+import { LearningEfficiency } from "./components/LearningEfficiency/LearningEfficiency";
 import { LearnModeCard } from "./components/LearnModeCard/LearnModeCard";
 import { LearnProgressCard } from "./components/LearnProgressCard/LearnProgressCard";
-import { LearningEfficiency } from "./components/LearningEfficiency/LearningEfficiency";
-import { Button } from "@/components/ui/button";
-import { RotateCcw } from "lucide-react";
 
 interface LearningModesViewProps {
   collection: AvaiableCollectionType;
@@ -42,9 +42,9 @@ export const Learn: React.FC<LearningModesViewProps> = () => {
           <Button>Rozpocznij naukę</Button>
         </div>
 
-        <div className="space-y-4 mb-8 mt-8">
+        <div className="space-y-3 mb-8 mt-8">
           {learningModes.map((mode: LearningMode) => (
-            <LearnModeCard key={mode.id} mode={mode} />
+            <LearnModeCard key={mode.id} mode={mode} collection={collection} />
           ))}
         </div>
 

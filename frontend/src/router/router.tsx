@@ -13,6 +13,7 @@ import {
 import { Header } from "@/components/Header/Header";
 import { Collection } from "@/pages/Collection/Collection";
 import { Dashboard } from "@/pages/Dashboard/Dashboard";
+import { FlashCards } from "@/pages/FlashCards/FlashCards";
 import { Landing } from "@/pages/Landing/Landing";
 import { Learn } from "@/pages/Learn/Learn";
 import { NotFound } from "@/pages/NotFound/NotFound";
@@ -65,10 +66,18 @@ export const learnPage = createRoute({
   component: Learn,
 });
 
+export const flashCardsPage = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "collections/$collectionId/learn/flashcards",
+  component: FlashCards,
+});
+
 const routeTree = rootRoute.addChildren([
   landingPage,
   dashboardPage,
-  collectionsPage.addChildren([collectionPage.addChildren([learnPage])]),
+  collectionsPage.addChildren([
+    collectionPage.addChildren([learnPage.addChildren([flashCardsPage])]),
+  ]),
 ]);
 
 export const router = createRouter({

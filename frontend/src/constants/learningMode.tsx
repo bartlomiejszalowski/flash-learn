@@ -10,6 +10,7 @@ export const learningModes: LearningMode[] = [
     icon: <BookOpen className="h-6 w-6" />,
     completed: false,
     points: 10,
+    href: "flashcards",
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ export const learningModes: LearningMode[] = [
     icon: <CheckSquare className="h-6 w-6" />,
     completed: false,
     points: 20,
+    href: "polishtoenglish",
   },
   {
     id: 3,
@@ -26,6 +28,7 @@ export const learningModes: LearningMode[] = [
     icon: <CheckSquare className="h-6 w-6" />,
     completed: false,
     points: 30,
+    href: "englishtopolish",
   },
   {
     id: 4,
@@ -34,6 +37,7 @@ export const learningModes: LearningMode[] = [
     icon: <Edit className="h-6 w-6" />,
     completed: false,
     points: 40,
+    href: "polishtoenglish",
   },
   {
     id: 5,
@@ -42,6 +46,7 @@ export const learningModes: LearningMode[] = [
     icon: <Edit className="h-6 w-6" />,
     completed: false,
     points: 50,
+    href: "englishtopolish",
   },
   {
     id: 6,
@@ -50,6 +55,7 @@ export const learningModes: LearningMode[] = [
     icon: <Headphones className="h-6 w-6" />,
     completed: false,
     points: 60,
+    href: "englishtopolish",
   },
   {
     id: 7,
@@ -58,6 +64,7 @@ export const learningModes: LearningMode[] = [
     icon: <Headphones className="h-6 w-6" />,
     completed: false,
     points: 70,
+    href: "polishtoenglish",
   },
   {
     id: 8,
@@ -66,6 +73,7 @@ export const learningModes: LearningMode[] = [
     icon: <Volume2 className="h-6 w-6" />,
     completed: false,
     points: 80,
+    href: "englishtopolish",
   },
   {
     id: 9,
@@ -74,5 +82,6 @@ export const learningModes: LearningMode[] = [
     icon: <Volume2 className="h-6 w-6" />,
     completed: false,
     points: 90,
+    href: "polishtoenglish",
   },
 ];

@@ -17,7 +17,7 @@ export const StartLearning: React.FC<Prop> = ({ collection }) => {
         params={{ collectionId: collection.id }}
       >
         <Button className="flex items-center bg-green-600 hover:bg-green-700">
-          <Play className="mr-2 h-4 w-4" /> Rozpocznij naukę
+          <Play className="mr-2 h-4 w-4" /> Przejdz do panelu nauki
         </Button>
       </Link>
     </div>

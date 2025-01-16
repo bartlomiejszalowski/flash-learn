@@ -57,4 +57,5 @@ export type LearningMode = {
   icon: React.ReactNode;
   completed: boolean;
   points: number;
+  href: string;
 };
