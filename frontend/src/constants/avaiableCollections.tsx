@@ -11,18 +11,22 @@ export const availableCollections = [
       {
         word: "Hello",
         translation: "Witaj",
+        image: "/flamingo.jpg", //link to public folder
       },
       {
         word: "Goodbye",
         translation: "Do widzenia",
+        image: "/flamingo.jpg", //link to public folder
       },
       {
         word: "Thank you",
         translation: "Dzień dobry",
+        image: "/flamingo.jpg", //link to public folder
       },
       {
         word: "Yes",
         translation: "Tak",
+        image: "/flamingo.jpg", //link to public folder
       },
       {
         word: "No",
@@ -44,14 +48,17 @@ export const availableCollections = [
       {
         word: "Hello",
         translation: "Witaj",
+        image: "/flamingo.jpg", //link to public folder
       },
       {
         word: "Goodbye",
         translation: "Do widzenia",
+        image: "/flamingo.jpg", //link to public folder
       },
       {
         word: "Thank you",
         translation: "Dzień dobry",
+        image: "/flamingo.jpg", //link to public folder
       },
       {
         word: "Yes",

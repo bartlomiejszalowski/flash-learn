@@ -20,6 +20,7 @@ export type LearningEffectivenessItemType = {
 export type VocabularyType = {
   word: string;
   translation: string;
+  image?: string;
 };
 
 export type AvaiableCollectionType = {
