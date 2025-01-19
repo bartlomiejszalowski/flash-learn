@@ -4,6 +4,7 @@ import {
   FeatureType,
   LearningMode,
   TestimonialType,
+  VocabularyType,
 } from "@/@Types/general";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { customCardCreator } from "@/creators/customCardCreator";
@@ -22,13 +23,16 @@ type Props = {
     | "collectionProgress"
     | "learnProgress"
     | "learningMode"
-    | "learningEfficiency";
+    | "learningEfficiency"
+    | "flashCardFront"
+    | "flashCardBack";
   prop?:
     | FeatureType
     | TestimonialType
     | AvaiableCollectionType
     | CollectionType
-    | LearningMode;
+    | LearningMode
+    | VocabularyType;
 };
 
 export const CustomCard: React.FC<Props> = ({ type, prop }) => {

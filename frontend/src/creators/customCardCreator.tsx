@@ -5,6 +5,7 @@ import {
   LearningEffectivenessItemType,
   LearningMode,
   TestimonialType,
+  VocabularyType,
 } from "@/@Types/general";
 import { CollectionProgressBody } from "@/pages/Collection/components/CollectionProgress/components/CollectionProgressBody";
 import { CollectionProgressHeader } from "@/pages/Collection/components/CollectionProgress/components/CollectionProgressHeader";
@@ -20,6 +21,7 @@ import { QuickStartLearningBody } from "@/pages/Dashboard/components/QuickStartL
 import { QuickStartHeader } from "@/pages/Dashboard/components/QuickStartLearning/components/QuickStartHeader";
 import { ScoreCardBody } from "@/pages/Dashboard/components/ScoreCard/components/ScoreCardBody";
 import { ScoreCardHeader } from "@/pages/Dashboard/components/ScoreCard/components/ScoreCardHeader";
+import { FlashCardBody } from "@/pages/FlashCards/components/FlashCardBody";
 import { FeatureBody } from "@/pages/Landing/sections/Feature/components/FeatureBody";
 import { FeatureHeader } from "@/pages/Landing/sections/Feature/components/FeatureHeader";
 import { TestimonialBody } from "@/pages/Landing/sections/Testimonial/components/TestimonialBody";
@@ -38,6 +40,7 @@ export const customCardCreator = (
     | AvaiableCollectionType
     | CollectionType
     | LearningMode
+    | VocabularyType
 ) => {
   let header;
   let body;
@@ -114,6 +117,19 @@ export const customCardCreator = (
       break;
     case "learningEfficiency":
       body = <LearningEfficiencyBody />;
+      break;
+    case "flashCardFront":
+      body = (
+        <FlashCardBody
+          type="front"
+          currentVocabulary={prop as VocabularyType}
+        />
+      );
+      break;
+    case "flashCardBack":
+      body = (
+        <FlashCardBody type="back" currentVocabulary={prop as VocabularyType} />
+      );
       break;
     default:
       throw new Error(`Unsupported type: ${type}`);
