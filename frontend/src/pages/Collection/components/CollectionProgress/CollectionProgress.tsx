@@ -1,10 +1,14 @@
-import { AvaiableCollectionType } from "@/@Types/general";
 import { CustomCard } from "@/components/CustomCard/CustomCard";
+import { availableCollections } from "@/constants/avaiableCollections";
+import { useCollectionStore } from "@/store/collectionStore";
 
-interface Prop {
-  collection: AvaiableCollectionType;
-}
+export const CollectionProgress = () => {
+  const collectionId = useCollectionStore(
+    (state) => state.selectedCollectionId
+  );
+  const collection = availableCollections.find((c) => c.id === collectionId);
 
-export const CollectionProgress: React.FC<Prop> = ({ collection }) => {
+  if (!collection) return <div>Collection not found</div>;
+
   return <CustomCard type="collectionProgress" prop={collection} />;
 };

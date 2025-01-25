@@ -1,14 +1,16 @@
 import { Link } from "@tanstack/react-router";
 import { Play } from "lucide-react";
 
-import { AvaiableCollectionType } from "@/@Types/general";
 import { Button } from "@/components/ui/button";
+import { useCollectionStore } from "@/store/collectionStore";
 
-interface Prop {
-  collection: AvaiableCollectionType;
-}
+export const StartLearning = () => {
+  const collection = useCollectionStore((state) => state.selectedCollection);
 
-export const StartLearning: React.FC<Prop> = ({ collection }) => {
+  if (!collection) {
+    return <div>Collection not found</div>;
+  }
+
   return (
     <div className="flex justify-between items-center my-6">
       <h2 className="text-2xl font-bold">Słówka w kolekcji</h2>

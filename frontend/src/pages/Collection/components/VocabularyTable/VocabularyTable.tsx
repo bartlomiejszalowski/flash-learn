@@ -1,19 +1,20 @@
-import React from "react";
-
-import { VocabularyType } from "@/@Types/general";
 import { Table } from "@/components/ui/table";
+import { useCollectionStore } from "@/store/collectionStore";
 
 import { VocabularyTableBody } from "./components/VocabularyTableBody";
 import { VocabularyTableHeader } from "./components/VocabularyTableHeader";
 
-interface Props {
-  vocabulary: VocabularyType[];
-}
-export const VocabularyTable: React.FC<Props> = ({ vocabulary }) => {
+export const VocabularyTable = () => {
+  const collection = useCollectionStore((state) => state.selectedCollection);
+
+  if (!collection) {
+    return <div>Collection not found</div>;
+  }
+
   return (
     <Table className="border-2 ">
       <VocabularyTableHeader />
-      <VocabularyTableBody vocabulary={vocabulary} />
+      <VocabularyTableBody vocabulary={collection.vocabulary} />
     </Table>
   );
 };

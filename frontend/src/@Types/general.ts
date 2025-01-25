@@ -30,6 +30,7 @@ export type AvaiableCollectionType = {
   cardCount: number;
   description: string;
   vocabulary: VocabularyType[];
+  collectionProgress: number;
 };
 
 export type CollectionType = {

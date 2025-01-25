@@ -7,6 +7,7 @@ export const availableCollections = [
     Icon: <BookOpen className="h-6 w-6 mr-2 text-blue-500" />,
     cardCount: 100,
     description: "Opis kolekcji",
+    collectionProgress: 50,
     vocabulary: [
       {
         word: "Hello",
@@ -44,6 +45,7 @@ export const availableCollections = [
     Icon: <BookOpen className="h-6 w-6 mr-2 text-blue-500" />,
     cardCount: 150,
     description: "Opis kolekcji",
+    collectionProgress: 50,
     vocabulary: [
       {
         word: "Hello",
@@ -80,6 +82,7 @@ export const availableCollections = [
     Icon: <BookOpen className="h-6 w-6 mr-2 text-blue-500" />,
     cardCount: 75,
     description: "Opis kolekcji",
+    collectionProgress: 50,
     vocabulary: [
       {
         word: "Hello",
@@ -113,6 +116,7 @@ export const availableCollections = [
     Icon: <BookOpen className="h-6 w-6 mr-2 text-blue-500" />,
     cardCount: 50,
     description: "Opis kolekcji",
+    collectionProgress: 50,
     vocabulary: [
       {
         word: "Hello",
@@ -146,6 +150,7 @@ export const availableCollections = [
     Icon: <BookOpen className="h-6 w-6 mr-2 text-blue-500" />,
     cardCount: 200,
     description: "Opis kolekcji",
+    collectionProgress: 50,
     vocabulary: [
       {
         word: "Hello",

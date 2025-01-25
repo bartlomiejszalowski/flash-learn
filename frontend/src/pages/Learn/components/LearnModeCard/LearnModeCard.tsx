@@ -1,15 +1,19 @@
 import { Link } from "@tanstack/react-router";
 import React from "react";
 
-import { AvaiableCollectionType, LearningMode } from "@/@Types/general";
+import { LearningMode } from "@/@Types/general";
 import { CustomCard } from "@/components/CustomCard/CustomCard";
+import { useCollectionStore } from "@/store/collectionStore";
 
 interface Props {
   mode: LearningMode;
-  collection: AvaiableCollectionType;
 }
 
-export const LearnModeCard: React.FC<Props> = ({ mode, collection }) => {
+export const LearnModeCard: React.FC<Props> = ({ mode }) => {
+  const collection = useCollectionStore((state) => state.selectedCollection);
+
+  if (!collection) return <div>Collection not found</div>;
+
   return (
     <div>
       <Link
