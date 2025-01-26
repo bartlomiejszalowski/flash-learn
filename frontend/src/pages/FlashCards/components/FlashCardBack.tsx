@@ -1,23 +1,23 @@
-import React from "react";
-
-import { VocabularyType } from "@/@Types/general";
 import { CustomCard } from "@/components/CustomCard/CustomCard";
+import { useCollectionStore } from "@/store/collectionStore";
+import { useLearningModesStore } from "@/store/learningModesStore";
 
-interface Props {
-  flipCard: () => void;
-  currentVocabulary: VocabularyType;
-}
+export const FlashCardBack = () => {
+  const currentCardIndex = useLearningModesStore((state) => state.currentIndex);
+  const flipCard = useLearningModesStore((state) => state.flipCard);
+  const cards = useCollectionStore(
+    (state) => state.selectedCollection?.vocabulary
+  );
 
-export const FlashCardBack: React.FC<Props> = ({
-  flipCard,
-  currentVocabulary,
-}) => {
+  if (!cards) return <div>Collection not found</div>;
+
+  const currentCard = cards[currentCardIndex];
   return (
     <div
       className="w-full h-full absolute [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col items-center justify-center p-6 cursor-pointer"
       onClick={flipCard}
     >
-      <CustomCard type="flashCardBack" prop={currentVocabulary} />
+      <CustomCard type="flashCardBack" prop={currentCard} />
     </div>
   );
 };

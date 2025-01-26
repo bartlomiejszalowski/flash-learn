@@ -8,6 +8,7 @@ type CollectionStore = {
   collections: AvaiableCollectionType[];
   selectedCollection: AvaiableCollectionType | null;
   selectCollection: (collectionId: string) => void; // Wybór kolekcji na podstawie ID
+  getCollection: (collectionId: string) => AvaiableCollectionType;
 };
 
 export const useCollectionStore = create<CollectionStore>()((set) => ({
@@ -16,5 +17,12 @@ export const useCollectionStore = create<CollectionStore>()((set) => ({
   selectCollection: (collectionId: string) => {
     const collection = availableCollections.find((c) => c.id === collectionId);
     set({ selectedCollection: collection });
+  },
+  getCollection: (collectionId: string) => {
+    const collection = availableCollections.find((c) => c.id === collectionId);
+    if (!collection) {
+      throw new Error("Collection not found");
+    }
+    return collection;
   },
 }));

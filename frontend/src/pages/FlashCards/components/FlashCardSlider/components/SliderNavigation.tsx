@@ -1,21 +1,22 @@
+import { useRouter } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import { VocabularyType } from "@/@Types/general";
 import { Button } from "@/components/ui/button";
+import { useCollectionStore } from "@/store/collectionStore";
+import { useLearningModesStore } from "@/store/learningModesStore";
 
-interface Props {
-  nextCard: () => void;
-  prevCard: () => void;
-  currentCardIndex: number;
-  cards: VocabularyType[];
-}
+export const SliderNavigation = () => {
+  const { history } = useRouter();
 
-export const SliderNavigation: React.FC<Props> = ({
-  nextCard,
-  prevCard,
-  currentCardIndex,
-  cards,
-}) => {
+  const currentCardIndex = useLearningModesStore((state) => state.currentIndex);
+  const prevCard = useLearningModesStore((state) => state.prevCard);
+  const nextCard = useLearningModesStore((state) => state.nextCard);
+  const cards = useCollectionStore(
+    (state) => state.selectedCollection?.vocabulary
+  );
+
+  if (!cards) return <div>Collection not found</div>;
+
   return (
     <div className="flex justify-between items-center mb-4">
       <Button onClick={prevCard} disabled={currentCardIndex === 0}>
@@ -24,12 +25,18 @@ export const SliderNavigation: React.FC<Props> = ({
       <span className="text-lg font-semibold">
         {currentCardIndex + 1} / {cards.length}
       </span>
-      <Button
-        onClick={nextCard}
-        disabled={currentCardIndex === cards.length - 1}
-      >
-        Następna <ChevronRight className="ml-2 h-4 w-4" />
-      </Button>
+      {currentCardIndex === cards.length - 1 ? (
+        <Button
+          onClick={() => history.go(-1)}
+          className="bg-green-500 hover:bg-green-600"
+        >
+          Completed 🫡
+        </Button>
+      ) : (
+        <Button onClick={nextCard}>
+          Następna <ChevronRight className="ml-2 h-4 w-4" />
+        </Button>
+      )}
     </div>
   );
 };

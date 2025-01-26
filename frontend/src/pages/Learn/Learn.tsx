@@ -29,7 +29,6 @@ export const Learn: React.FC<LearningModesViewProps> = () => {
   useEffect(() => {
     if (collectionId) {
       selectCollection(collectionId);
-      console.log("works");
     }
   }, [collectionId, selectCollection]);
 
@@ -44,7 +43,7 @@ export const Learn: React.FC<LearningModesViewProps> = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-8">
       <div className="max-w-2xl mx-auto">
-        <LearnHeader collectionName={selectedCollection.name} />
+        <LearnHeader />
 
         <LearnProgressCard />
 

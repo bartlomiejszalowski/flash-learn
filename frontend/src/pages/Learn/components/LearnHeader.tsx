@@ -1,16 +1,15 @@
-import React from "react";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useCollectionStore } from "@/store/collectionStore";
 
-interface Props {
-  collectionName: string;
-}
+export const LearnHeader = () => {
+  const collection = useCollectionStore((state) => state.selectedCollection);
 
-export const LearnHeader: React.FC<Props> = ({ collectionName }) => {
+  if (!collection) return <div>Collection not found</div>;
+
   return (
     <div className="flex justify-between items-center mb-6">
       <h1 className="text-3xl font-bold">
-        {collectionName} - <br /> Tryby nauki
+        {collection.name} - <br /> Tryby nauki
       </h1>
       <div className="flex items-center space-x-4">
         <div className="text-right">
