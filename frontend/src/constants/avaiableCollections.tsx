@@ -10,32 +10,38 @@ export const availableCollections = [
     collectionProgress: 50,
     vocabulary: [
       {
+        id: "v1",
         word: "Hello",
-        translation: "Witaj",
-        image: "/flamingo.jpg", //link to public folder
+        translation: "Cześć",
+        image: "/flamingo.jpg", // link to public folder
       },
       {
+        id: "v2",
         word: "Goodbye",
         translation: "Do widzenia",
-        image: "/flamingo.jpg", //link to public folder
+        image: "/flamingo.jpg", // link to public folder
       },
       {
+        id: "v3",
         word: "Thank you",
-        translation: "Dzień dobry",
-        image: "/flamingo.jpg", //link to public folder
+        translation: "Dziękuję",
+        image: "/flamingo.jpg", // link to public folder
       },
       {
+        id: "v4",
         word: "Yes",
         translation: "Tak",
-        image: "/flamingo.jpg", //link to public folder
+        image: "/flamingo.jpg", // link to public folder
       },
       {
+        id: "v5",
         word: "No",
         translation: "Nie",
       },
       {
+        id: "v6",
         word: "Please",
-        translation: "Prosze",
+        translation: "Proszę",
       },
     ],
   },
@@ -48,31 +54,37 @@ export const availableCollections = [
     collectionProgress: 50,
     vocabulary: [
       {
-        word: "Hello",
-        translation: "Witaj",
-        image: "/flamingo.jpg", //link to public folder
+        id: "v7",
+        word: "Meeting",
+        translation: "Spotkanie",
+        image: "/flamingo.jpg", // link to public folder
       },
       {
-        word: "Goodbye",
-        translation: "Do widzenia",
-        image: "/flamingo.jpg", //link to public folder
+        id: "v8",
+        word: "Deadline",
+        translation: "Termin wykonania",
+        image: "/flamingo.jpg", // link to public folder
       },
       {
-        word: "Thank you",
-        translation: "Dzień dobry",
-        image: "/flamingo.jpg", //link to public folder
+        id: "v9",
+        word: "Invoice",
+        translation: "Faktura",
+        image: "/flamingo.jpg", // link to public folder
       },
       {
-        word: "Yes",
-        translation: "Tak",
+        id: "v10",
+        word: "Contract",
+        translation: "Umowa",
       },
       {
-        word: "No",
-        translation: "Nie",
+        id: "v11",
+        word: "Client",
+        translation: "Klient",
       },
       {
-        word: "Please",
-        translation: "Prosze",
+        id: "v12",
+        word: "Profit",
+        translation: "Zysk",
       },
     ],
   },
@@ -85,28 +97,34 @@ export const availableCollections = [
     collectionProgress: 50,
     vocabulary: [
       {
-        word: "Hello",
-        translation: "Witaj",
+        id: "v13",
+        word: "Piece of cake",
+        translation: "Bułka z masłem",
       },
       {
-        word: "Goodbye",
-        translation: "Do widzenia",
+        id: "v14",
+        word: "Break the ice",
+        translation: "Przełamać lody",
       },
       {
-        word: "Thank you",
-        translation: "Dzień dobry",
+        id: "v15",
+        word: "Burn the midnight oil",
+        translation: "Pracować po nocach",
       },
       {
-        word: "Yes",
-        translation: "Tak",
+        id: "v16",
+        word: "Hit the nail on the head",
+        translation: "Trafić w sedno",
       },
       {
-        word: "No",
-        translation: "Nie",
+        id: "v17",
+        word: "A blessing in disguise",
+        translation: "Błogosławieństwo w przebraniu",
       },
       {
-        word: "Please",
-        translation: "Prosze",
+        id: "v18",
+        word: "Cost an arm and a leg",
+        translation: "Kosztować majątek",
       },
     ],
   },
@@ -119,28 +137,34 @@ export const availableCollections = [
     collectionProgress: 50,
     vocabulary: [
       {
-        word: "Hello",
-        translation: "Witaj",
+        id: "v19",
+        word: "Go",
+        translation: "Iść",
       },
       {
-        word: "Goodbye",
-        translation: "Do widzenia",
+        id: "v20",
+        word: "Eat",
+        translation: "Jeść",
       },
       {
-        word: "Thank you",
-        translation: "Dzień dobry",
+        id: "v21",
+        word: "Run",
+        translation: "Biec",
       },
       {
-        word: "Yes",
-        translation: "Tak",
+        id: "v22",
+        word: "Write",
+        translation: "Pisać",
       },
       {
-        word: "No",
-        translation: "Nie",
+        id: "v23",
+        word: "Speak",
+        translation: "Mówić",
       },
       {
-        word: "Please",
-        translation: "Prosze",
+        id: "v24",
+        word: "Have",
+        translation: "Mieć",
       },
     ],
   },
@@ -153,28 +177,34 @@ export const availableCollections = [
     collectionProgress: 50,
     vocabulary: [
       {
-        word: "Hello",
-        translation: "Witaj",
+        id: "v25",
+        word: "Comprehensive",
+        translation: "Wszechstronny",
       },
       {
-        word: "Goodbye",
-        translation: "Do widzenia",
+        id: "v26",
+        word: "Ambiguous",
+        translation: "Dwuznaczny",
       },
       {
-        word: "Thank you",
-        translation: "Dzień dobry",
+        id: "v27",
+        word: "Noteworthy",
+        translation: "Warty uwagi",
       },
       {
-        word: "Yes",
-        translation: "Tak",
+        id: "v28",
+        word: "Feasible",
+        translation: "Wykonalny",
       },
       {
-        word: "No",
-        translation: "Nie",
+        id: "v29",
+        word: "Meticulous",
+        translation: "Skrupulatny",
       },
       {
-        word: "Please",
-        translation: "Prosze",
+        id: "v30",
+        word: "Predominant",
+        translation: "Dominujący",
       },
     ],
   },

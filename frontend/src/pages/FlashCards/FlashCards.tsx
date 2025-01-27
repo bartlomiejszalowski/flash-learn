@@ -3,6 +3,10 @@ import { useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 import { useCollectionStore } from "@/store/collectionStore";
+import {
+  LearningModes,
+  useLearningModesStore,
+} from "@/store/learningModesStore";
 
 import { FlashCard } from "./components/FlashCard";
 import { FlashCardSlider } from "./components/FlashCardSlider/FlashCardSlider";
@@ -13,6 +17,8 @@ export const FlashCards = () => {
     select: (params) => params.collectionId,
   });
 
+  const resetStore = useLearningModesStore((state) => state.resetStore);
+
   const selectCollection = useCollectionStore(
     (state) => state.selectCollection
   );
@@ -20,10 +26,15 @@ export const FlashCards = () => {
   useEffect(() => {
     if (collectionId) {
       selectCollection(collectionId);
+      resetStore(LearningModes.Flashcards);
     }
-  }, [collectionId, selectCollection]);
+  }, [collectionId, selectCollection, resetStore]);
 
   const { history } = useRouter();
+
+  const handleFinish = () => {
+    history.go(-1);
+  };
 
   return (
     <div className="bg-gradient-to-b from-blue-50 to-white  flex flex-col items-center justify-be">
@@ -32,7 +43,7 @@ export const FlashCards = () => {
       <FlashCard />
 
       <FlashCardSlider />
-      <Button variant="outline" onClick={() => history.go(-1)} className="mt-6">
+      <Button variant="outline" onClick={handleFinish} className="mt-6">
         Zakończ naukę
       </Button>
     </div>

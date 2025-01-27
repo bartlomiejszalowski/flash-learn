@@ -18,6 +18,7 @@ export type LearningEffectivenessItemType = {
 };
 
 export type VocabularyType = {
+  id: string;
   word: string;
   translation: string;
   image?: string;

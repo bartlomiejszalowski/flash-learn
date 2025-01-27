@@ -17,6 +17,7 @@ import { FlashCards } from "@/pages/FlashCards/FlashCards";
 import { Landing } from "@/pages/Landing/Landing";
 import { Learn } from "@/pages/Learn/Learn";
 import { NotFound } from "@/pages/NotFound/NotFound";
+import { SelectPolish } from "@/pages/SelectPolish/SelectPolish";
 
 export const queryClient = new QueryClient({
   queryCache: new QueryCache({
@@ -72,11 +73,19 @@ export const flashCardsPage = createRoute({
   component: FlashCards,
 });
 
+export const selectPolishPage = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "collections/$collectionId/learn/selectPolish",
+  component: SelectPolish,
+});
+
 const routeTree = rootRoute.addChildren([
   landingPage,
   dashboardPage,
   collectionsPage.addChildren([
-    collectionPage.addChildren([learnPage.addChildren([flashCardsPage])]),
+    collectionPage.addChildren([
+      learnPage.addChildren([flashCardsPage, selectPolishPage]),
+    ]),
   ]),
 ]);
 

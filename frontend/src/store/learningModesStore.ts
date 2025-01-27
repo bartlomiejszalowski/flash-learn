@@ -1,5 +1,9 @@
 import { create } from "zustand";
 
+import { VocabularyType } from "@/@Types/general";
+
+import { useCollectionStore } from "./collectionStore";
+
 // Create an enum for LearningModes
 export enum LearningModes {
   Flashcards = "flashcards",
@@ -15,6 +19,7 @@ export enum LearningModes {
 
 // Define the shape of the Zustand store
 type LearningModesStore = {
+  learningVocabulary: VocabularyType[] | null;
   currentLearningMode: LearningModes;
   currentIndex: number;
   isFlipped: boolean;
@@ -24,10 +29,13 @@ type LearningModesStore = {
   setIsFlipped: (flipped: boolean) => void;
   nextCard: () => void;
   prevCard: () => void;
+  resetStore: (defaultMode: LearningModes) => void;
+  loadLearningVocabulary: () => void;
 };
 
 // Zustand store creation
 export const useLearningModesStore = create<LearningModesStore>()((set) => ({
+  learningVocabulary: null,
   currentLearningMode: LearningModes.Flashcards, // Default mode
   currentIndex: 0,
   isFlipped: false,
@@ -49,4 +57,19 @@ export const useLearningModesStore = create<LearningModesStore>()((set) => ({
       currentIndex: state.currentIndex - 1,
       isFlipped: false,
     })),
+  resetStore: (defaultMode: LearningModes) =>
+    set(() => ({
+      currentLearningMode: defaultMode,
+      currentIndex: 0,
+      isFlipped: false,
+    })),
+  //use it also in other app parts
+  loadLearningVocabulary: () => {
+    const selectedCollection = useCollectionStore.getState().selectedCollection;
+    if (selectedCollection) {
+      set({ learningVocabulary: selectedCollection.vocabulary });
+    } else {
+      console.log("Collection not found");
+    }
+  },
 }));

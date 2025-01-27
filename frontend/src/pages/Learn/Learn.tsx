@@ -6,6 +6,7 @@ import { LearningMode } from "@/@Types/general";
 import { Button } from "@/components/ui/button";
 import { learningModes } from "@/constants/learningMode";
 import { useCollectionStore } from "@/store/collectionStore";
+import { useLearningModesStore } from "@/store/learningModesStore";
 
 import { LearnHeader } from "./components/LearnHeader";
 import { LearningEfficiency } from "./components/LearningEfficiency/LearningEfficiency";
@@ -26,11 +27,17 @@ export const Learn: React.FC<LearningModesViewProps> = () => {
     (state) => state.selectCollection
   );
 
+  const loadLearningVocabulary = useLearningModesStore(
+    (state) => state.loadLearningVocabulary
+  );
+
   useEffect(() => {
     if (collectionId) {
+      //check if it have to be async
       selectCollection(collectionId);
+      loadLearningVocabulary();
     }
-  }, [collectionId, selectCollection]);
+  }, [collectionId, selectCollection, loadLearningVocabulary]);
 
   const selectedCollection = useCollectionStore(
     (state) => state.selectedCollection
