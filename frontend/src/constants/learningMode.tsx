@@ -28,7 +28,7 @@ export const learningModes: LearningMode[] = [
     icon: <CheckSquare className="h-6 w-6" />,
     completed: false,
     points: 30,
-    href: "englishtopolish",
+    href: "selectEnglish",
   },
   {
     id: 4,

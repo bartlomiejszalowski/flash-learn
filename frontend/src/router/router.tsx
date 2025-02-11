@@ -13,11 +13,10 @@ import {
 import { Header } from "@/components/Header/Header";
 import { Collection } from "@/pages/Collection/Collection";
 import { Dashboard } from "@/pages/Dashboard/Dashboard";
-import { FlashCards } from "@/pages/FlashCards/FlashCards";
 import { Landing } from "@/pages/Landing/Landing";
 import { Learn } from "@/pages/Learn/Learn";
+import { LearnModes } from "@/pages/LearnModes/LearnModes";
 import { NotFound } from "@/pages/NotFound/NotFound";
-import { SelectPolish } from "@/pages/SelectPolish/SelectPolish";
 
 export const queryClient = new QueryClient({
   queryCache: new QueryCache({
@@ -67,16 +66,10 @@ export const learnPage = createRoute({
   component: Learn,
 });
 
-export const flashCardsPage = createRoute({
+export const learnModePage = createRoute({
   getParentRoute: () => rootRoute,
-  path: "collections/$collectionId/learn/flashcards",
-  component: FlashCards,
-});
-
-export const selectPolishPage = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "collections/$collectionId/learn/selectPolish",
-  component: SelectPolish,
+  path: "collections/$collectionId/learn/$learningMode",
+  component: LearnModes,
 });
 
 const routeTree = rootRoute.addChildren([
@@ -84,7 +77,9 @@ const routeTree = rootRoute.addChildren([
   dashboardPage,
   collectionsPage.addChildren([
     collectionPage.addChildren([
-      learnPage.addChildren([flashCardsPage, selectPolishPage]),
+      learnPage.addChildren([
+        learnModePage, // Handles all dynamic learning modes
+      ]),
     ]),
   ]),
 ]);

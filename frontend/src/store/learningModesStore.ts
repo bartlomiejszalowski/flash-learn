@@ -38,7 +38,7 @@ type LearningModesStore = {
   prevCard: () => void;
   resetStore: (defaultMode: LearningModes) => void;
   loadLearningVocabulary: () => void;
-  setSelectedAnswer: (answer: string) => void;
+  setSelectedAnswer: (answer: string, mode?: LearningModes) => void;
   setIsCorrect: (correct: boolean) => void;
   setProgress: (progress: number) => void;
   generateAnswersOptions: () => void;
@@ -112,10 +112,6 @@ export const useLearningModesStore = create<LearningModesStore>()(
     //  })
     // },
     setSelectedAnswer: (answer) =>
-      // const learingVocabulary = ["a", "b", "c"];
-      // const currentIndex = 0;
-      //const progress = 0;
-
       set((state) => {
         const {
           learningVocabulary,
@@ -139,11 +135,6 @@ export const useLearningModesStore = create<LearningModesStore>()(
           updatedVocabulary.push(incorrectAnswer); // Add the incorrect answer back
         } else {
           updatedVocabulary.splice(currentIndex, 1); // Remove the correct answer
-
-          // newProgress = Math.min(
-          //   100,
-          //   progress + (1 / totalVocabularyCount) * 100
-          // );
         }
 
         const completedCount = totalVocabularyCount - updatedVocabulary.length;

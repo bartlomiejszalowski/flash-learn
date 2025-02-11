@@ -13,7 +13,7 @@ import { FlashCardSlider } from "./components/FlashCardSlider/FlashCardSlider";
 
 export const FlashCards = () => {
   const collectionId = useParams({
-    from: "/collections/$collectionId/learn/flashcards",
+    from: "/collections/$collectionId/learn/$learningMode",
     select: (params) => params.collectionId,
   });
 

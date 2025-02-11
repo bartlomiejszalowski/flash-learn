@@ -1,10 +1,10 @@
-import { useParams } from "@tanstack/react-router";
 import { RotateCcw } from "lucide-react";
 import { useEffect } from "react";
 
 import { LearningMode } from "@/@Types/general";
 import { Button } from "@/components/ui/button";
 import { learningModes } from "@/constants/learningMode";
+import { learnPage } from "@/router/router";
 import { useCollectionStore } from "@/store/collectionStore";
 import { useLearningModesStore } from "@/store/learningModesStore";
 
@@ -18,10 +18,12 @@ interface LearningModesViewProps {
 }
 
 export const Learn: React.FC<LearningModesViewProps> = () => {
-  const collectionId = useParams({
-    from: "/collections/$collectionId/learn",
-    select: (params) => params.collectionId,
-  });
+  // const collectionId = useParams({
+  //   from: "/collections/$collectionId/learn",
+  //   select: (params) => params.collectionId,
+  // });
+
+  const { collectionId } = learnPage.useParams();
 
   const selectCollection = useCollectionStore(
     (state) => state.selectCollection
