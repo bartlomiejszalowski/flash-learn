@@ -38,10 +38,10 @@ type LearningModesStore = {
   prevCard: () => void;
   resetStore: (defaultMode: LearningModes) => void;
   loadLearningVocabulary: () => void;
-  setSelectedAnswer: (answer: string, mode?: LearningModes) => void;
+  setSelectedAnswer: (answer: string, mode: LearningModes) => void;
   setIsCorrect: (correct: boolean) => void;
   setProgress: (progress: number) => void;
-  generateAnswersOptions: () => void;
+  generateAnswersOptions: (learningMode: LearningModes) => void;
 };
 
 // Zustand store creation
@@ -111,7 +111,7 @@ export const useLearningModesStore = create<LearningModesStore>()(
 
     //  })
     // },
-    setSelectedAnswer: (answer) =>
+    setSelectedAnswer: (answer, mode) =>
       set((state) => {
         const {
           learningVocabulary,
@@ -123,7 +123,12 @@ export const useLearningModesStore = create<LearningModesStore>()(
           return state; // Fallback to current state
 
         // const correctAnswer = learningVocabulary[currentIndex].translation;
-        const correctAnswer = learningVocabulary[0].translation;
+
+        // REFCTOR LATER
+        const correctAnswer =
+          mode === LearningModes.SelectEnglish
+            ? learningVocabulary[currentIndex].word
+            : learningVocabulary[currentIndex].translation;
         const isCorrect = answer === correctAnswer;
         set({ isCorrect });
 
@@ -147,7 +152,7 @@ export const useLearningModesStore = create<LearningModesStore>()(
             selectedAnswer: null,
             isCorrect: null, // Jednoczesny reset
           });
-          generateAnswersOptions();
+          generateAnswersOptions(mode);
         }, 1000);
 
         return {
@@ -160,7 +165,7 @@ export const useLearningModesStore = create<LearningModesStore>()(
 
     setIsCorrect: (correct: boolean) => set({ isCorrect: correct }),
     setProgress: (progress: number) => set({ progress }),
-    generateAnswersOptions: () => {
+    generateAnswersOptions: (learningMode: LearningModes) => {
       set((state) => {
         const { learningVocabulary, currentIndex } = state;
 
@@ -173,19 +178,27 @@ export const useLearningModesStore = create<LearningModesStore>()(
           return { answersOptions: [] };
         }
 
-        const correctAnswer = learningVocabulary[currentIndex].translation;
+        const correctAnswer =
+          learningMode === LearningModes.SelectEnglish
+            ? learningVocabulary[currentIndex].word
+            : learningVocabulary[currentIndex].translation;
         const allVocabularies =
           useCollectionStore
             .getState()
             .collections?.flatMap((collection) => collection.vocabulary) || [];
 
+        // REFACTOR LATER
         const incorrectAnswers = shuffle(
           allVocabularies
             .filter(
               (vocabulary) =>
                 vocabulary.id !== learningVocabulary[currentIndex].id
             )
-            .map((vocabulary) => vocabulary.translation)
+            .map((vocabulary) =>
+              learningMode === LearningModes.SelectEnglish
+                ? vocabulary.word
+                : vocabulary.translation
+            )
         ).slice(0, 3);
 
         const options = shuffle([correctAnswer, ...incorrectAnswers]);

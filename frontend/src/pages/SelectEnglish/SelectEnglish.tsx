@@ -1,6 +1,7 @@
 import { useParams } from "@tanstack/react-router";
 import { useEffect } from "react";
 
+import { SelectMode } from "@/components/SelectMode/SelectMode";
 import { useCollectionStore } from "@/store/collectionStore";
 import { useLearningModesStore } from "@/store/learningModesStore";
 
@@ -13,8 +14,8 @@ export const SelectEnglish = () => {
     (state) => state.loadLearningVocabulary
   );
 
-  // Extract collectionId and learningMode from URL
-  const { collectionId, learningMode } = useParams({
+  // zmienic sposob dosatwiania params
+  const { collectionId } = useParams({
     from: "/collections/$collectionId/learn/$learningMode",
     select: (params) => ({
       collectionId: params.collectionId,
@@ -27,11 +28,5 @@ export const SelectEnglish = () => {
     selectCollection(collectionId);
   }, [collectionId, selectCollection, loadLearningVocabulary]);
 
-  //   return <SelectMode />;
-  return (
-    <div>
-      <h1>{collectionId}</h1>
-      <h2>{learningMode}</h2>
-    </div>
-  );
+  return <SelectMode />;
 };

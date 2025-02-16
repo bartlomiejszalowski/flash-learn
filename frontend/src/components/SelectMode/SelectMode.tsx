@@ -1,6 +1,7 @@
 import { useRouter } from "@tanstack/react-router";
 import { useEffect } from "react";
 
+import { learnModePage } from "@/router/router";
 import { useLearningModesStore } from "@/store/learningModesStore";
 import { LearningModes } from "@/store/learningModesStore";
 
@@ -11,12 +12,10 @@ import { Progress } from "../ui/progress";
 export const SelectMode = () => {
   const { history } = useRouter();
 
+  const { learningMode } = learnModePage.useParams();
+
   const learningVocabulary = useLearningModesStore(
     (state) => state.learningVocabulary
-  );
-
-  const currentLearningMode = useLearningModesStore(
-    (state) => state.currentLearningMode
   );
 
   const resetStore = useLearningModesStore((state) => state.resetStore);
@@ -40,8 +39,8 @@ export const SelectMode = () => {
   );
 
   useEffect(() => {
-    generateAnswersOptions();
-  }, [generateAnswersOptions]);
+    generateAnswersOptions(learningMode as LearningModes);
+  }, [generateAnswersOptions, learningMode]);
 
   useEffect(() => {
     return () => {
@@ -65,7 +64,7 @@ export const SelectMode = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-8 flex flex-col items-center justify-center">
       <h1 className="text-3xl font-bold mb-8 text-gray-500">
-        {currentLearningMode === LearningModes.SelectPolish
+        {learningMode === LearningModes.SelectPolish
           ? "Select Polish"
           : "Select English"}
       </h1>
@@ -82,13 +81,17 @@ export const SelectMode = () => {
           <Card className="mb-8">
             <CardContent className="p-6">
               <h2 className="text-4xl font-bold text-center mb-8">
-                {learningVocabulary[currentIndex].word}
+                {learningMode === LearningModes.SelectPolish
+                  ? learningVocabulary[currentIndex].word
+                  : learningVocabulary[currentIndex].translation}
               </h2>
               <div className="grid grid-cols-2 gap-4">
                 {answersOptions.map((option, index) => (
                   <Button
                     key={index}
-                    onClick={() => setSelectedAnswer(option)}
+                    onClick={() =>
+                      setSelectedAnswer(option, learningMode as LearningModes)
+                    }
                     disabled={selectedAnswer !== null}
                     className={`h-20 text-lg ${
                       selectedAnswer === option

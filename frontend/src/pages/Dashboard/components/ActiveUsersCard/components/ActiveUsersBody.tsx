@@ -1,3 +1,9 @@
 export const ActiveUsersBody = () => {
-  return <p className="text-3xl font-bold">1,234</p>;
+  return (
+    <div>
+      <p>1. Bartek</p>
+      <p>2. Kasia</p>
+      <p>3. Asia</p>
+    </div>
+  );
 };
