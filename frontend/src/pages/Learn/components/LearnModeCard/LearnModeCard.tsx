@@ -3,7 +3,7 @@ import React from "react";
 
 import { LearningMode } from "@/@Types/general";
 import { CustomCard } from "@/components/CustomCard/CustomCard";
-import { useCollectionStore } from "@/store/collectionStore";
+import { useCollectionStore } from "@/store/Collection/collectionStore";
 
 interface Props {
   mode: LearningMode;

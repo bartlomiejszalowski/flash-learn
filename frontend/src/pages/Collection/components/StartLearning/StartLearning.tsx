@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Play } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { useCollectionStore } from "@/store/collectionStore";
+import { useCollectionStore } from "@/store/Collection/collectionStore";
 
 export const StartLearning = () => {
   const collection = useCollectionStore((state) => state.selectedCollection);

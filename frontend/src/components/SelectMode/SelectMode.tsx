@@ -2,8 +2,8 @@ import { useRouter } from "@tanstack/react-router";
 import { useEffect } from "react";
 
 import { learnModePage } from "@/router/router";
-import { useLearningModesStore } from "@/store/learningModesStore";
-import { LearningModes } from "@/store/learningModesStore";
+import { LearningModes } from "@/store/LearningModes/learningModeService";
+import { useLearningModesStore } from "@/store/LearningModes/learningModesStore";
 
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
@@ -30,17 +30,17 @@ export const SelectMode = () => {
 
   const selectedAnswer = useLearningModesStore((state) => state.selectedAnswer);
 
-  const generateAnswersOptions = useLearningModesStore(
-    (state) => state.generateAnswersOptions
-  );
+  // const generateAnswersOptions = useLearningModesStore(
+  //   (state) => state.generateAnswersOptions
+  // );
 
   const setSelectedAnswer = useLearningModesStore(
     (state) => state.setSelectedAnswer
   );
 
-  useEffect(() => {
-    generateAnswersOptions(learningMode as LearningModes);
-  }, [generateAnswersOptions, learningMode]);
+  // useEffect(() => {
+  //   generateAnswersOptions(learningMode as LearningModes);
+  // }, [generateAnswersOptions, learningMode]);
 
   useEffect(() => {
     return () => {

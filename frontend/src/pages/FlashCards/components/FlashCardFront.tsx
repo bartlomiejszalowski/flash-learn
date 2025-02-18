@@ -1,6 +1,6 @@
 import { CustomCard } from "@/components/CustomCard/CustomCard";
-import { useCollectionStore } from "@/store/collectionStore";
-import { useLearningModesStore } from "@/store/learningModesStore";
+import { useCollectionStore } from "@/store/Collection/collectionStore";
+import { useLearningModesStore } from "@/store/LearningModes/learningModesStore";
 
 export const FlashCardFront = () => {
   const currentCardIndex = useLearningModesStore((state) => state.currentIndex);

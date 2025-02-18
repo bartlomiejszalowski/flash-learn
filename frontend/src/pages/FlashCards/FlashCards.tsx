@@ -2,11 +2,9 @@ import { useParams, useRouter } from "@tanstack/react-router";
 import { useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
-import { useCollectionStore } from "@/store/collectionStore";
-import {
-  LearningModes,
-  useLearningModesStore,
-} from "@/store/learningModesStore";
+import { useCollectionStore } from "@/store/Collection/collectionStore";
+import { LearningModes } from "@/store/LearningModes/learningModeService";
+import { useLearningModesStore } from "@/store/LearningModes/learningModesStore";
 
 import { FlashCard } from "./components/FlashCard";
 import { FlashCardSlider } from "./components/FlashCardSlider/FlashCardSlider";

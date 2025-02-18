@@ -2,8 +2,8 @@ import { useRouter } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { useCollectionStore } from "@/store/collectionStore";
-import { useLearningModesStore } from "@/store/learningModesStore";
+import { useCollectionStore } from "@/store/Collection/collectionStore";
+import { useLearningModesStore } from "@/store/LearningModes/learningModesStore";
 
 export const SliderNavigation = () => {
   const { history } = useRouter();

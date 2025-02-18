@@ -37,7 +37,7 @@ export const learningModes: LearningMode[] = [
     icon: <Edit className="h-6 w-6" />,
     completed: false,
     points: 40,
-    href: "polishtoenglish",
+    href: "writePolish",
   },
   {
     id: 5,

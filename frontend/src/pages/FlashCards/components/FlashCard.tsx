@@ -1,4 +1,4 @@
-import { useLearningModesStore } from "@/store/learningModesStore";
+import { useLearningModesStore } from "@/store/LearningModes/learningModesStore";
 
 import { FlashCardBack } from "./FlashCardBack";
 import { FlashCardFront } from "./FlashCardFront";

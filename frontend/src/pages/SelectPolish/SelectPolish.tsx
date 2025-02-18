@@ -1,9 +1,10 @@
-import { useParams } from "@tanstack/react-router";
 import { useEffect } from "react";
 
 import { SelectMode } from "@/components/SelectMode/SelectMode";
-import { useCollectionStore } from "@/store/collectionStore";
-import { useLearningModesStore } from "@/store/learningModesStore";
+import { learnModePage } from "@/router/router";
+import { useCollectionStore } from "@/store/Collection/collectionStore";
+import { LearningModes } from "@/store/LearningModes/learningModeService";
+import { useLearningModesStore } from "@/store/LearningModes/learningModesStore";
 
 export const SelectPolish = () => {
   const selectCollection = useCollectionStore(
@@ -14,13 +15,10 @@ export const SelectPolish = () => {
     (state) => state.loadLearningVocabulary
   );
 
-  const collectionId = useParams({
-    from: "/collections/$collectionId/learn/$learningMode",
-    select: (params) => params.collectionId,
-  });
+  const { collectionId, learningMode } = learnModePage.useParams();
 
   useEffect(() => {
-    loadLearningVocabulary();
+    loadLearningVocabulary(learningMode as LearningModes);
     selectCollection(collectionId);
   }, [collectionId, selectCollection, loadLearningVocabulary]);
 

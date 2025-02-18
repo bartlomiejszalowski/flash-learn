@@ -1,6 +1,6 @@
 import { Slider } from "@/components/ui/slider";
-import { useCollectionStore } from "@/store/collectionStore";
-import { useLearningModesStore } from "@/store/learningModesStore";
+import { useCollectionStore } from "@/store/Collection/collectionStore";
+import { useLearningModesStore } from "@/store/LearningModes/learningModesStore";
 
 import { SliderNavigation } from "./components/SliderNavigation";
 

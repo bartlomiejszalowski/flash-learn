@@ -2,7 +2,7 @@ import { useParams } from "@tanstack/react-router";
 import { useEffect } from "react";
 
 import { availableCollections } from "@/constants/avaiableCollections";
-import { useCollectionStore } from "@/store/collectionStore";
+import { useCollectionStore } from "@/store/Collection/collectionStore";
 
 import { CollectionProgress } from "./components/CollectionProgress/CollectionProgress";
 import { StartLearning } from "./components/StartLearning/StartLearning";

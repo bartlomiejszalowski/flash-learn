@@ -1,5 +1,5 @@
 import { CustomCard } from "@/components/CustomCard/CustomCard";
-import { useCollectionStore } from "@/store/collectionStore";
+import { useCollectionStore } from "@/store/Collection/collectionStore";
 
 export const CollectionProgress = () => {
   const collection = useCollectionStore((state) => state.selectedCollection);

@@ -1,5 +1,5 @@
 import { Table } from "@/components/ui/table";
-import { useCollectionStore } from "@/store/collectionStore";
+import { useCollectionStore } from "@/store/Collection/collectionStore";
 
 import { VocabularyTableBody } from "./components/VocabularyTableBody";
 import { VocabularyTableHeader } from "./components/VocabularyTableHeader";
