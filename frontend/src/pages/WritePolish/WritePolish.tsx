@@ -30,11 +30,9 @@ export const WritePolish = () => {
     (state) => state.learningVocabulary
   );
 
-  const isCorrect = useLearningModesStore((state) => state.isCorrect);
+  const selectDontknow = useLearningModesStore((state) => state.selectDontknow);
 
-  //   useEffect(() => {
-  //     setFocus("answer");
-  //   }, [setFocus]);
+  const isCorrect = useLearningModesStore((state) => state.isCorrect);
 
   const form = useForm<AnswerForm>({
     resolver: zodResolver(answerSchema),
@@ -46,28 +44,15 @@ export const WritePolish = () => {
   const handleFormSubmit = form.handleSubmit((data) => {
     if (!data.answer) return;
 
-    console.log(data.answer);
-
     setSelectedAnswer(data.answer, learningMode as LearningModes);
-  });
-  //   const handleDontKnow = () => {
-  //     setIsCorrect(false);
-  //     setProgress(
-  //       (prevProgress) => prevProgress + (1 / initialCards.length) * 100
-  //     );
 
-  //     // Move to the next card after a short delay
-  //     setTimeout(() => {
-  //       if (currentCardIndex < cards.length - 1) {
-  //         setCurrentCardIndex((prevIndex) => prevIndex + 1);
-  //       } else {
-  //         // All cards have been reviewed
-  //         setCurrentCardIndex(0);
-  //       }
-  //       setIsCorrect(null);
-  //       reset();
-  //     }, 1500);
-  //   };
+    setTimeout(() => form.reset(), 2000);
+  });
+
+  const handleDontKnow = () => {
+    selectDontknow(learningMode as LearningModes);
+    form.reset();
+  };
 
   if (!learningVocabulary) return;
 
@@ -98,7 +83,7 @@ export const WritePolish = () => {
                   </Button>
                   <Button
                     type="button"
-                    onClick={() => {}}
+                    onClick={handleDontKnow}
                     className="flex-1"
                     variant="secondary"
                     disabled={isCorrect !== null}

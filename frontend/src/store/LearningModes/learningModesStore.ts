@@ -31,6 +31,7 @@ type LearningModesStore = {
   setIsCorrect: (correct: boolean) => void;
   setProgress: (progress: number) => void;
   generateAnswersOptions: (learningMode: LearningModes) => void;
+  selectDontknow: (mode: LearningModes) => void;
 };
 
 // Zustand store creation
@@ -170,6 +171,7 @@ export const useLearningModesStore = create<LearningModesStore>()(
             .collections?.flatMap((collection) => collection.vocabulary) || [];
 
         let correctAnswer;
+        //refactor
         switch (learningMode) {
           case LearningModes.SelectEnglish:
           case LearningModes.WriteEnglish:
@@ -204,6 +206,29 @@ export const useLearningModesStore = create<LearningModesStore>()(
           answersOptions: options,
           correctAnswer, // Zapisanie poprawnej odpowiedzi w stanie
         };
+      });
+    },
+    selectDontknow: (mode) => {
+      set((state) => {
+        const { learningVocabulary, currentIndex, generateAnswersOptions } =
+          state;
+
+        if (!learningVocabulary) return state;
+
+        const updatedVocabulary = [...learningVocabulary];
+
+        setTimeout(() => {
+          const [incorrectAnswer] = updatedVocabulary.splice(currentIndex, 1);
+          updatedVocabulary.push(incorrectAnswer);
+
+          set({
+            learningVocabulary: updatedVocabulary,
+            isCorrect: null,
+          });
+          generateAnswersOptions(mode);
+        }, 1500);
+
+        return { isCorrect: false };
       });
     },
   }))
