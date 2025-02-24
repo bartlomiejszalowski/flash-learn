@@ -46,7 +46,7 @@ export const learningModes: LearningMode[] = [
     icon: <Edit className="h-6 w-6" />,
     completed: false,
     points: 50,
-    href: "englishtopolish",
+    href: "writeEnglish",
   },
   {
     id: 6,
@@ -55,7 +55,7 @@ export const learningModes: LearningMode[] = [
     icon: <Headphones className="h-6 w-6" />,
     completed: false,
     points: 60,
-    href: "englishtopolish",
+    href: "hearEnglishSelect",
   },
   {
     id: 7,
@@ -64,7 +64,7 @@ export const learningModes: LearningMode[] = [
     icon: <Headphones className="h-6 w-6" />,
     completed: false,
     points: 70,
-    href: "polishtoenglish",
+    href: "hearPolishSelect",
   },
   {
     id: 8,

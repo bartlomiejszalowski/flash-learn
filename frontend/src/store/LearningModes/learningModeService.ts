@@ -4,8 +4,8 @@ export enum LearningModes {
   SelectEnglish = "selectEnglish",
   WritePolish = "writePolish",
   WriteEnglish = "writeEnglish",
-  HearPolish = "hearPolish",
-  HearEnglish = "hearEnglish",
+  HearPolishSelect = "hearPolishSelect",
+  HearEnglishSelect = "hearEnglishSelect",
   WriteFromHearEnglish = "writeFromHearEnglish",
   WriteFromHearPolish = "writeFromHearPolish",
 }
@@ -32,12 +32,12 @@ export const modeSettings: Record<LearningModes, ModeSetting> = {
     timeout: 2000,
     getCorrectAnswer: (word) => word.translation,
   },
-  [LearningModes.HearPolish]: {
-    timeout: 2000,
-    getCorrectAnswer: (word) => word.translation,
+  [LearningModes.HearPolishSelect]: {
+    timeout: 1000,
+    getCorrectAnswer: (word) => word.word,
   },
-  [LearningModes.HearEnglish]: {
-    timeout: 2000,
+  [LearningModes.HearEnglishSelect]: {
+    timeout: 1000,
     getCorrectAnswer: (word) => word.translation,
   },
   [LearningModes.WriteFromHearEnglish]: {

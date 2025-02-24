@@ -5,9 +5,7 @@ import { learnModePage } from "@/router/router";
 import { LearningModes } from "@/store/LearningModes/learningModeService";
 import { useLearningModesStore } from "@/store/LearningModes/learningModesStore";
 
-console.log("render in SelectEnglish");
-
-export const SelectEnglish = () => {
+export const HearEnglishSelect = () => {
   const loadLearningVocabulary = useLearningModesStore(
     (state) => state.loadLearningVocabulary
   );
@@ -16,7 +14,7 @@ export const SelectEnglish = () => {
 
   useEffect(() => {
     loadLearningVocabulary(learningMode as LearningModes);
-  }, [collectionId, loadLearningVocabulary, learningMode]);
+  }, [collectionId, learningMode, loadLearningVocabulary]);
 
   return <SelectMode />;
 };

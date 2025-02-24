@@ -87,7 +87,9 @@ export const useLearningModesStore = create<LearningModesStore>()(
         // const currentMode = get().currentLearningMode;
         if (
           mode === LearningModes.SelectEnglish ||
-          mode === LearningModes.SelectPolish
+          mode === LearningModes.SelectPolish ||
+          mode === LearningModes.HearEnglishSelect ||
+          mode === LearningModes.HearPolishSelect
         ) {
           get().generateAnswersOptions(mode);
         }
@@ -160,7 +162,6 @@ export const useLearningModesStore = create<LearningModesStore>()(
           learningVocabulary.length === 0 ||
           currentIndex >= learningVocabulary.length
         ) {
-          console.error("Nie załadowano słownictwa lub nieprawidłowy indeks!");
           return { answersOptions: [] };
         }
 
@@ -174,10 +175,12 @@ export const useLearningModesStore = create<LearningModesStore>()(
         //refactor
         switch (learningMode) {
           case LearningModes.SelectEnglish:
+          case LearningModes.HearPolishSelect:
           case LearningModes.WriteEnglish:
             correctAnswer = currentVocab.word;
             break;
           case LearningModes.SelectPolish:
+          case LearningModes.HearEnglishSelect:
           case LearningModes.WritePolish:
             correctAnswer = currentVocab.translation;
             break;
@@ -186,12 +189,16 @@ export const useLearningModesStore = create<LearningModesStore>()(
             return { answersOptions: [] };
         }
 
+        const shouldUseWord = new Set([
+          LearningModes.SelectEnglish,
+          LearningModes.HearPolishSelect,
+        ]);
+
         // Tworzenie głębokiej kopii tablicy i filtrowanie bieżącego słowa
         const availableAnswers = allVocabularies
           .filter((vocab) => vocab.id !== currentVocab.id)
           .map((vocabulary) =>
-            learningMode === LearningModes.SelectEnglish ||
-            learningMode === LearningModes.WriteEnglish
+            shouldUseWord.has(learningMode)
               ? vocabulary.word
               : vocabulary.translation
           );

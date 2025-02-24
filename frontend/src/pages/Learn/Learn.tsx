@@ -32,7 +32,6 @@ export const Learn: React.FC<LearningModesViewProps> = () => {
     if (collectionId) {
       //check if it have to be async
       selectCollection(collectionId);
-      loadLearningVocabulary();
     }
   }, [collectionId, selectCollection, loadLearningVocabulary]);
 

@@ -1,5 +1,6 @@
 import { useRouter } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { Volume2 } from "lucide-react";
+import { useCallback, useEffect } from "react";
 
 import { learnModePage } from "@/router/router";
 import { LearningModes } from "@/store/LearningModes/learningModeService";
@@ -30,17 +31,29 @@ export const SelectMode = () => {
 
   const selectedAnswer = useLearningModesStore((state) => state.selectedAnswer);
 
-  // const generateAnswersOptions = useLearningModesStore(
-  //   (state) => state.generateAnswersOptions
-  // );
+  const isHearPolish = learningMode === LearningModes.HearPolishSelect;
+  const isAudioMode =
+    learningMode === LearningModes.HearEnglishSelect || isHearPolish;
+
+  const isSelectMode =
+    learningMode === LearningModes.SelectPolish ||
+    learningMode === LearningModes.SelectEnglish;
 
   const setSelectedAnswer = useLearningModesStore(
     (state) => state.setSelectedAnswer
   );
 
-  // useEffect(() => {
-  //   generateAnswersOptions(learningMode as LearningModes);
-  // }, [generateAnswersOptions, learningMode]);
+  const speakWord = useCallback(() => {
+    if (learningVocabulary) {
+      const wordToSpeak = isHearPolish
+        ? learningVocabulary[currentIndex].translation
+        : learningVocabulary[currentIndex].word;
+
+      const utterance = new SpeechSynthesisUtterance(wordToSpeak);
+      utterance.lang = isHearPolish ? "pl-PL" : "en-US";
+      window.speechSynthesis.speak(utterance);
+    }
+  }, [learningVocabulary, currentIndex, isHearPolish]);
 
   useEffect(() => {
     return () => {
@@ -48,26 +61,38 @@ export const SelectMode = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (learningVocabulary) {
+        speakWord();
+      }
+
+      return;
+    }, 500);
+
+    return () => clearTimeout(timer); // Usunięcie timera przy kolejnej zmianie
+  }, [currentIndex, learningVocabulary, isAudioMode, speakWord]);
+
   const handleFinish = () => {
     history.go(-1);
     resetStore(LearningModes.SelectPolish);
   };
 
-  if (!learningVocabulary) {
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-8 flex flex-col items-center justify-center">
-        <h1 className="text-3xl font-bold mb-8">Wybierz kolekcję</h1>
-      </div>
-    );
-  }
+  if (!learningVocabulary) return <div>no vocabulary</div>;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-8 flex flex-col items-center justify-center">
       <h1 className="text-3xl font-bold mb-8 text-gray-500">
-        {learningMode === LearningModes.SelectPolish
-          ? "Select Polish"
-          : "Select English"}
+        {/* REFACTOR -> SWITCH HERE */}
+        {isSelectMode
+          ? learningMode === LearningModes.SelectPolish
+            ? "Select Polish"
+            : "Select English"
+          : isHearPolish
+            ? "Wybierz angieslskie znaczenie słowka które słyszysz"
+            : "wybierz polskie znaczenie słowka które słyszysz"}
       </h1>
+
       <div className="w-full max-w-2xl">
         {progress === 100 ? (
           <Card className="mb-8">
@@ -80,11 +105,20 @@ export const SelectMode = () => {
         ) : (
           <Card className="mb-8">
             <CardContent className="p-6">
-              <h2 className="text-4xl font-bold text-center mb-8">
-                {learningMode === LearningModes.SelectPolish
-                  ? learningVocabulary[currentIndex].word
-                  : learningVocabulary[currentIndex].translation}
-              </h2>
+              {!isAudioMode && (
+                <h2 className="text-4xl font-bold text-center mb-8">
+                  {learningMode === LearningModes.SelectPolish
+                    ? learningVocabulary[currentIndex].word
+                    : learningVocabulary[currentIndex].translation}
+                </h2>
+              )}
+              {isAudioMode && (
+                <div className="flex justify-center mb-8">
+                  <Button onClick={speakWord} variant="outline" size="lg">
+                    <Volume2 className="mr-2 h-6 w-6" />
+                  </Button>
+                </div>
+              )}
               <div className="grid grid-cols-2 gap-4">
                 {answersOptions.map((option, index) => (
                   <Button

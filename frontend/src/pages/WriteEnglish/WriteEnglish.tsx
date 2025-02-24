@@ -1,5 +1,5 @@
 import { WriteMode } from "@/components/WriteMode/WriteMode";
 
-export const WritePolish = () => {
+export const WriteEnglish = () => {
   return <WriteMode />;
 };
