@@ -46,7 +46,7 @@ export const modeSettings: Record<LearningModes, ModeSetting> = {
   },
   [LearningModes.WriteFromHearPolish]: {
     timeout: 2000,
-    getCorrectAnswer: (word) => word.translation,
+    getCorrectAnswer: (word) => word.word,
   },
   [LearningModes.Flashcards]: {
     timeout: 2000,

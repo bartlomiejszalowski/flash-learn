@@ -3,7 +3,9 @@ import { LearningModes } from "@/store/LearningModes/learningModeService";
 
 import { FlashCards } from "../FlashCards/FlashCards";
 import { HearEnglishSelect } from "../HearEnglishSelect/HearEnglishSelect";
+import { HearEnglishWrite } from "../HearEnglishWrite/HearEnglishWrite";
 import { HearPolishSelect } from "../HearPolishSelect/HearPolishSelect";
+import { HearPolishWrite } from "../HearPolishWrite/HearPolishWrite";
 import { NotFound } from "../NotFound/NotFound";
 import { SelectEnglish } from "../SelectEnglish/SelectEnglish";
 import { SelectPolish } from "../SelectPolish/SelectPolish";
@@ -18,8 +20,8 @@ const learningModes: Record<LearningModes, React.FC> = {
   [LearningModes.WriteEnglish]: WriteEnglish,
   [LearningModes.HearPolishSelect]: HearPolishSelect,
   [LearningModes.HearEnglishSelect]: HearEnglishSelect,
-  [LearningModes.WriteFromHearEnglish]: () => <div>WriteFromHearEnglish</div>,
-  [LearningModes.WriteFromHearPolish]: () => <div>WriteFromHearPolish</div>,
+  [LearningModes.WriteFromHearEnglish]: HearEnglishWrite,
+  [LearningModes.WriteFromHearPolish]: HearPolishWrite,
 };
 
 export const LearnModes = () => {

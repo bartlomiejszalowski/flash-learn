@@ -1,11 +1,12 @@
 import { useRouter } from "@tanstack/react-router";
-import { Volume2 } from "lucide-react";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 
+import { useAudio } from "@/hooks/useAudio";
 import { learnModePage } from "@/router/router";
 import { LearningModes } from "@/store/LearningModes/learningModeService";
 import { useLearningModesStore } from "@/store/LearningModes/learningModesStore";
 
+import { AudioButton } from "../AudioButton/AudioButton";
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
 import { Progress } from "../ui/progress";
@@ -15,9 +16,17 @@ export const SelectMode = () => {
 
   const { learningMode } = learnModePage.useParams();
 
+  const { speakWord, isAudioMode } = useAudio({
+    learningMode: learningMode as LearningModes,
+  });
+
   const learningVocabulary = useLearningModesStore(
     (state) => state.learningVocabulary
   );
+
+  const isSelectMode =
+    learningMode === LearningModes.SelectPolish ||
+    learningMode === LearningModes.SelectEnglish;
 
   const resetStore = useLearningModesStore((state) => state.resetStore);
 
@@ -31,47 +40,15 @@ export const SelectMode = () => {
 
   const selectedAnswer = useLearningModesStore((state) => state.selectedAnswer);
 
-  const isHearPolish = learningMode === LearningModes.HearPolishSelect;
-  const isAudioMode =
-    learningMode === LearningModes.HearEnglishSelect || isHearPolish;
-
-  const isSelectMode =
-    learningMode === LearningModes.SelectPolish ||
-    learningMode === LearningModes.SelectEnglish;
-
   const setSelectedAnswer = useLearningModesStore(
     (state) => state.setSelectedAnswer
   );
-
-  const speakWord = useCallback(() => {
-    if (learningVocabulary) {
-      const wordToSpeak = isHearPolish
-        ? learningVocabulary[currentIndex].translation
-        : learningVocabulary[currentIndex].word;
-
-      const utterance = new SpeechSynthesisUtterance(wordToSpeak);
-      utterance.lang = isHearPolish ? "pl-PL" : "en-US";
-      window.speechSynthesis.speak(utterance);
-    }
-  }, [learningVocabulary, currentIndex, isHearPolish]);
 
   useEffect(() => {
     return () => {
       resetStore(LearningModes.SelectPolish);
     };
   }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (learningVocabulary) {
-        speakWord();
-      }
-
-      return;
-    }, 500);
-
-    return () => clearTimeout(timer); // Usunięcie timera przy kolejnej zmianie
-  }, [currentIndex, learningVocabulary, isAudioMode, speakWord]);
 
   const handleFinish = () => {
     history.go(-1);
@@ -88,7 +65,7 @@ export const SelectMode = () => {
           ? learningMode === LearningModes.SelectPolish
             ? "Select Polish"
             : "Select English"
-          : isHearPolish
+          : isAudioMode
             ? "Wybierz angieslskie znaczenie słowka które słyszysz"
             : "wybierz polskie znaczenie słowka które słyszysz"}
       </h1>
@@ -112,13 +89,7 @@ export const SelectMode = () => {
                     : learningVocabulary[currentIndex].translation}
                 </h2>
               )}
-              {isAudioMode && (
-                <div className="flex justify-center mb-8">
-                  <Button onClick={speakWord} variant="outline" size="lg">
-                    <Volume2 className="mr-2 h-6 w-6" />
-                  </Button>
-                </div>
-              )}
+              {isAudioMode && <AudioButton speakWord={speakWord} />}
               <div className="grid grid-cols-2 gap-4">
                 {answersOptions.map((option, index) => (
                   <Button

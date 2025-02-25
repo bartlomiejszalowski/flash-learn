@@ -1,8 +1,7 @@
 import { WriteMode } from "@/components/WriteMode/WriteMode";
 import { useLoadLearningVocabulary } from "@/hooks/useLoadLearningVocabulary";
 
-export const WriteEnglish = () => {
+export const HearEnglishWrite = () => {
   useLoadLearningVocabulary();
-
   return <WriteMode />;
 };

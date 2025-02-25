@@ -10,16 +10,27 @@ import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { AnswerForm } from "@/form/forms";
 import { answerSchema } from "@/form/schema";
+import { useAudio } from "@/hooks/useAudio";
 import { learnModePage } from "@/router/router";
 import { LearningModes } from "@/store/LearningModes/learningModeService";
 import { useLearningModesStore } from "@/store/LearningModes/learningModesStore";
 
+import { AudioButton } from "../AudioButton/AudioButton";
+
 export const WriteMode = () => {
   const { learningMode } = learnModePage.useParams();
+
+  const { speakWord, isAudioMode } = useAudio({
+    learningMode: learningMode as LearningModes,
+  });
 
   const setSelectedAnswer = useLearningModesStore(
     (state) => state.setSelectedAnswer
   );
+
+  const isWriteMode =
+    learningMode === LearningModes.WritePolish ||
+    learningMode === LearningModes.WriteEnglish;
 
   const correctAnswer = useLearningModesStore((state) => state.correctAnswer);
 
@@ -69,19 +80,28 @@ export const WriteMode = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-8 flex flex-col items-center justify-center">
-      <h1 className="text-3xl font-bold mb-8">
-        {isWritePolish
-          ? "Wpisz polskie tłumaczenie"
-          : "Wpisz angielskie tłumaczenie"}
+      <h1 className="text-3xl font-bold mb-8 text-gray-500">
+        {/* REFACTOR -> SWITCH HERE */}
+        {isWriteMode
+          ? learningMode === LearningModes.WritePolish
+            ? "Write Polish"
+            : "Write English"
+          : learningMode === LearningModes.WriteFromHearEnglish
+            ? "Wypisz polskie znaczenie słowka które słyszysz"
+            : "Wypisz angielskie znaczenie słowka które słyszysz"}
       </h1>
+
       <div className="w-full max-w-2xl">
         <Card className="mb-8">
           <CardContent className="p-6">
-            <h2 className="text-4xl font-bold text-center mb-8">
-              {isWritePolish
-                ? learningVocabulary[currentIndex].word
-                : learningVocabulary[currentIndex].translation}
-            </h2>
+            {!isAudioMode && (
+              <h2 className="text-4xl font-bold text-center mb-8">
+                {isWritePolish
+                  ? learningVocabulary[currentIndex].word
+                  : learningVocabulary[currentIndex].translation}
+              </h2>
+            )}
+            {isAudioMode && <AudioButton speakWord={speakWord} />}
             <Form {...form}>
               <form onSubmit={handleFormSubmit} className="space-y-4">
                 <Input
