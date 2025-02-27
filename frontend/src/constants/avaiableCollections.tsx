@@ -208,4 +208,184 @@ export const availableCollections = [
       },
     ],
   },
+  {
+    id: "a6",
+    name: "Słowka Michał",
+    Icon: <BookOpen className="h-6 w-6 mr-2 text-blue-500" />,
+    cardCount: 200,
+    description: "Opis kolekcji",
+    collectionProgress: 50,
+    vocabulary: [
+      {
+        id: "w101",
+        word: "concert",
+        translation: "koncert",
+      },
+      {
+        id: "w102",
+        word: "hit single",
+        translation: "hit",
+      },
+      {
+        id: "w103",
+        word: "lead singer",
+        translation: "główny wokalista",
+      },
+      {
+        id: "w104",
+        word: "lyrics",
+        translation: "tekst piosenki",
+      },
+      {
+        id: "w105",
+        word: "music industry",
+        translation: "przemysł muzyczny",
+      },
+      {
+        id: "w106",
+        word: "perform",
+        translation: "występować",
+      },
+      {
+        id: "w107",
+        word: "record a song",
+        translation: "nagrać piosenkę",
+      },
+      {
+        id: "w108",
+        word: "release a new album",
+        translation: "wydać nowy album",
+      },
+      {
+        id: "w109",
+        word: "alliteration",
+        translation: "aliteracja",
+      },
+      {
+        id: "w110",
+        word: "best-selling (author)",
+        translation: "najlepiej sprzedający się (autor)",
+      },
+      {
+        id: "w111",
+        word: "fiction",
+        translation: "fikcja",
+      },
+      {
+        id: "w112",
+        word: "paperback",
+        translation: "książka w miękkiej oprawie",
+      },
+      {
+        id: "w113",
+        word: "rhyme",
+        translation: "rym",
+      },
+      {
+        id: "w114",
+        word: "publish a book",
+        translation: "wydać książkę",
+      },
+      {
+        id: "w115",
+        word: "sell",
+        translation: "sprzedawać",
+      },
+      {
+        id: "w116",
+        word: "art house",
+        translation: "kino studyjne",
+      },
+      {
+        id: "w117",
+        word: "box office",
+        translation: "kasa biletowa",
+      },
+      {
+        id: "w118",
+        word: "script",
+        translation: "scenariusz",
+      },
+      {
+        id: "w119",
+        word: "stage",
+        translation: "scena",
+      },
+      {
+        id: "w120",
+        word: "theatre company",
+        translation: "zespół teatralny",
+      },
+      {
+        id: "w121",
+        word: "well-written",
+        translation: "dobrze napisany",
+      },
+      {
+        id: "w122",
+        word: "wicked",
+        translation: "niegodziwy",
+      },
+      {
+        id: "w123",
+        word: "documentary",
+        translation: "film dokumentalny",
+      },
+      {
+        id: "w124",
+        word: "sitcom",
+        translation: "komedia sytuacyjna",
+      },
+      {
+        id: "w125",
+        word: "drama",
+        translation: "dramat",
+      },
+      {
+        id: "w126",
+        word: "action-packed",
+        translation: "pełen akcji",
+      },
+      {
+        id: "w127",
+        word: "moving",
+        translation: "wzruszający",
+      },
+      {
+        id: "w128",
+        word: "thought-provoking",
+        translation: "zmuszający do myślenia",
+      },
+      {
+        id: "w129",
+        word: "canvas",
+        translation: "płótno",
+      },
+      {
+        id: "w130",
+        word: "exhibition",
+        translation: "wystawa",
+      },
+      {
+        id: "w131",
+        word: "palette",
+        translation: "paleta",
+      },
+      {
+        id: "w132",
+        word: "broadsheet",
+        translation: "gazeta dużego formatu",
+      },
+      {
+        id: "w133",
+        word: "circulation figures",
+        translation: "wysokość nakładu",
+      },
+      {
+        id: "w134",
+        word: "foreign correspondent",
+        translation: "korespondent zagraniczny",
+      },
+    ],
+  },
 ];

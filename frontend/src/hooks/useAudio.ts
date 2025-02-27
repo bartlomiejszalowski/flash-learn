@@ -47,7 +47,34 @@ export const useAudio = ({ learningMode }: Props) => {
           : "en-US";
       utterance.rate = 1;
 
-      window.speechSynthesis.speak(utterance);
+      // Funkcja do ustawienia głosu i mówienia
+      const setupVoiceAndSpeak = () => {
+        const voices = window.speechSynthesis.getVoices();
+        // Jeśli lista głosów jest pusta, może to oznaczać, że głosy jeszcze się nie załadowały
+        if (voices.length > 0) {
+          const preferredVoice = voices.find(
+            (voice) =>
+              (utterance.lang === "pl-PL" && voice.lang.includes("pl")) ||
+              (utterance.lang === "en-US" &&
+                voice.name.includes("Google US English"))
+          );
+
+          if (preferredVoice) {
+            utterance.voice = preferredVoice;
+          }
+          window.speechSynthesis.speak(utterance);
+        } else {
+          // Jeśli głosy nie są jeszcze dostępne, poczekajmy na zdarzenie onvoiceschanged
+          window.speechSynthesis.onvoiceschanged = () => {
+            setupVoiceAndSpeak();
+            // Czyścimy handler po użyciu
+            window.speechSynthesis.onvoiceschanged = null;
+          };
+        }
+      };
+
+      // Wywołanie funkcji
+      setupVoiceAndSpeak();
     }
   }, [learningVocabulary, currentIndex, learningMode]);
 

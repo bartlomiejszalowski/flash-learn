@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "@tanstack/react-router";
 import { CheckCircle, XCircle } from "lucide-react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -11,6 +12,7 @@ import { Progress } from "@/components/ui/progress";
 import { AnswerForm } from "@/form/forms";
 import { answerSchema } from "@/form/schema";
 import { useAudio } from "@/hooks/useAudio";
+import { useLoadLearningVocabulary } from "@/hooks/useLoadLearningVocabulary";
 import { learnModePage } from "@/router/router";
 import { LearningModes } from "@/store/LearningModes/learningModeService";
 import { useLearningModesStore } from "@/store/LearningModes/learningModesStore";
@@ -18,7 +20,10 @@ import { useLearningModesStore } from "@/store/LearningModes/learningModesStore"
 import { AudioButton } from "../AudioButton/AudioButton";
 
 export const WriteMode = () => {
+  const { history } = useRouter();
   const { learningMode } = learnModePage.useParams();
+
+  useLoadLearningVocabulary();
 
   const { speakWord, isAudioMode } = useAudio({
     learningMode: learningMode as LearningModes,
@@ -74,6 +79,12 @@ export const WriteMode = () => {
   const handleDontKnow = () => {
     selectDontknow(learningMode as LearningModes);
     form.reset();
+  };
+
+  // Fix this
+  const handleFinish = () => {
+    history.go(-1);
+    resetStore(LearningModes.SelectPolish);
   };
 
   if (!learningVocabulary) return;
@@ -154,7 +165,7 @@ export const WriteMode = () => {
           <Progress value={progress} className="w-full h-4" />
           <p className="text-center mt-2">{progress}</p>
         </div>
-        <Button variant="outline" onClick={() => {}} className="w-full">
+        <Button variant="outline" onClick={handleFinish} className="w-full">
           Zakończ naukę
         </Button>
       </div>

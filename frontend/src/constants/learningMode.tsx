@@ -84,13 +84,4 @@ export const learningModes: LearningMode[] = [
     points: 90,
     href: "writeFromHearPolish",
   },
-  {
-    id: 10,
-    name: "Powiedz poprawnie słówko po angielsku",
-    description: "Powiedz poprawnie słówko po angielsku",
-    icon: <Volume2 className="h-6 w-6" />,
-    completed: false,
-    points: 100,
-    href: "speakEnglish",
-  },
 ];

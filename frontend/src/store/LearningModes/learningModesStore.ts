@@ -77,27 +77,30 @@ export const useLearningModesStore = create<LearningModesStore>()(
     loadLearningVocabulary: (mode) => {
       const selectedCollection =
         useCollectionStore.getState().selectedCollection;
-      if (selectedCollection) {
-        const shuffledVocabulary = shuffle([...selectedCollection.vocabulary]); // Tworzenie kopii przed tasowaniem
-        set({
-          learningVocabulary: shuffledVocabulary,
-          totalVocabularyCount: shuffledVocabulary.length,
-        });
+      if (!selectedCollection) {
+        console.warn("Nie znaleziono kolekcji");
+        return;
+      }
 
-        if (
-          mode === LearningModes.SelectEnglish ||
-          mode === LearningModes.SelectPolish ||
-          mode === LearningModes.HearEnglishSelect ||
-          mode === LearningModes.HearPolishSelect ||
-          mode === LearningModes.WriteFromHearEnglish ||
-          mode === LearningModes.WriteFromHearPolish ||
-          mode === LearningModes.WriteEnglish ||
-          mode === LearningModes.WritePolish
-        ) {
-          get().generateAnswersOptions(mode);
-        }
-      } else {
-        console.log("Nie znaleziono kolekcji");
+      const shuffledVocabulary = shuffle([...selectedCollection.vocabulary]); // Kopia + tasowanie
+      set({
+        learningVocabulary: shuffledVocabulary,
+        totalVocabularyCount: shuffledVocabulary.length,
+      });
+
+      const validModes = [
+        LearningModes.SelectEnglish,
+        LearningModes.SelectPolish,
+        LearningModes.HearEnglishSelect,
+        LearningModes.HearPolishSelect,
+        LearningModes.WriteFromHearEnglish,
+        LearningModes.WriteFromHearPolish,
+        LearningModes.WriteEnglish,
+        LearningModes.WritePolish,
+      ];
+
+      if (validModes.includes(mode)) {
+        get().generateAnswersOptions(mode);
       }
     },
 
@@ -156,68 +159,6 @@ export const useLearningModesStore = create<LearningModesStore>()(
 
     setIsCorrect: (correct: boolean) => set({ isCorrect: correct }),
     setProgress: (progress: number) => set({ progress }),
-    // generateAnswersOptions: (learningMode: LearningModes) => {
-    //   set((state) => {
-    //     const { learningVocabulary, currentIndex } = state;
-
-    //     if (
-    //       !learningVocabulary ||
-    //       learningVocabulary.length === 0 ||
-    //       currentIndex >= learningVocabulary.length
-    //     ) {
-    //       return { answersOptions: [] };
-    //     }
-
-    //     const currentVocab = learningVocabulary[currentIndex];
-    //     const allVocabularies =
-    //       useCollectionStore
-    //         .getState()
-    //         .collections?.flatMap((collection) => collection.vocabulary) || [];
-
-    //     let correctAnswer;
-    //     //refactor
-    //     switch (learningMode) {
-    //       case LearningModes.SelectEnglish:
-    //       case LearningModes.HearPolishSelect:
-    //       case LearningModes.WriteEnglish:
-    //         correctAnswer = currentVocab.word;
-    //         break;
-    //       case LearningModes.SelectPolish:
-    //       case LearningModes.HearEnglishSelect:
-    //       case LearningModes.WritePolish:
-    //         correctAnswer = currentVocab.translation;
-    //         break;
-    //       default:
-    //         console.error("Nieprawidłowy tryb nauki!");
-    //         return { answersOptions: [] };
-    //     }
-
-    //     const shouldUseWord = new Set([
-    //       LearningModes.SelectEnglish,
-    //       LearningModes.HearPolishSelect,
-    //     ]);
-
-    //     // Tworzenie głębokiej kopii tablicy i filtrowanie bieżącego słowa
-    //     const availableAnswers = allVocabularies
-    //       .filter((vocab) => vocab.id !== currentVocab.id)
-    //       .map((vocabulary) =>
-    //         shouldUseWord.has(learningMode)
-    //           ? vocabulary.word
-    //           : vocabulary.translation
-    //       );
-
-    //     // Pobranie 3 losowych niepoprawnych odpowiedzi
-    //     const incorrectAnswers = shuffle(availableAnswers).slice(0, 3);
-
-    //     // Upewnienie się, że poprawna odpowiedź jest zawsze uwzględniona
-    //     const options = shuffle([correctAnswer, ...incorrectAnswers]);
-
-    //     return {
-    //       answersOptions: options,
-    //       correctAnswer, // Zapisanie poprawnej odpowiedzi w stanie
-    //     };
-    //   });
-    // },
     generateAnswersOptions: (learningMode: LearningModes) => {
       set((state) => {
         const { learningVocabulary, currentIndex } = state;
@@ -257,8 +198,8 @@ export const useLearningModesStore = create<LearningModesStore>()(
 
         // Tryby, które powinny zwrócić tylko poprawną odpowiedź
         const singleAnswerModes = new Set([
-          LearningModes.HearEnglishSelect,
-          LearningModes.HearPolishSelect,
+          LearningModes.WriteEnglish,
+          LearningModes.WritePolish,
           LearningModes.WriteFromHearEnglish,
           LearningModes.WriteFromHearPolish,
         ]);
@@ -271,12 +212,17 @@ export const useLearningModesStore = create<LearningModesStore>()(
         }
 
         // Tworzenie głębokiej kopii tablicy i filtrowanie bieżącego słowa
+        // REFACTOR HERE
         const availableAnswers = allVocabularies
-          .filter((vocab) => vocab.id !== currentVocab.id)
-          .map((vocabulary) =>
-            learningMode === LearningModes.WriteEnglish
-              ? vocabulary.word
-              : vocabulary.translation
+          .filter(({ id }) => id !== currentVocab.id)
+          .map(({ word, translation }) =>
+            [
+              LearningModes.WriteEnglish,
+              LearningModes.SelectEnglish,
+              LearningModes.HearPolishSelect,
+            ].includes(learningMode)
+              ? word
+              : translation
           );
 
         // Pobranie 3 losowych niepoprawnych odpowiedzi

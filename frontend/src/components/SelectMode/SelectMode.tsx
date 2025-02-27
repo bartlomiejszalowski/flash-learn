@@ -2,6 +2,7 @@ import { useRouter } from "@tanstack/react-router";
 import { useEffect } from "react";
 
 import { useAudio } from "@/hooks/useAudio";
+import { useLoadLearningVocabulary } from "@/hooks/useLoadLearningVocabulary";
 import { learnModePage } from "@/router/router";
 import { LearningModes } from "@/store/LearningModes/learningModeService";
 import { useLearningModesStore } from "@/store/LearningModes/learningModesStore";
@@ -13,6 +14,8 @@ import { Progress } from "../ui/progress";
 
 export const SelectMode = () => {
   const { history } = useRouter();
+
+  useLoadLearningVocabulary();
 
   const { learningMode } = learnModePage.useParams();
 
@@ -39,6 +42,8 @@ export const SelectMode = () => {
   const isCorrect = useLearningModesStore((state) => state.isCorrect);
 
   const selectedAnswer = useLearningModesStore((state) => state.selectedAnswer);
+
+  const correctAnswer = useLearningModesStore((state) => state.correctAnswer);
 
   const setSelectedAnswer = useLearningModesStore(
     (state) => state.setSelectedAnswer
@@ -98,13 +103,16 @@ export const SelectMode = () => {
                       setSelectedAnswer(option, learningMode as LearningModes)
                     }
                     disabled={selectedAnswer !== null}
-                    className={`h-20 text-lg ${
-                      selectedAnswer === option
-                        ? isCorrect
-                          ? "bg-green-500 hover:bg-green-600"
-                          : "bg-red-500 hover:bg-red-600"
-                        : ""
-                    }`}
+                    className={`h-20 text-lg transition-colors duration-300
+                      ${
+                        selectedAnswer === option
+                          ? isCorrect
+                            ? "bg-green-500 hover:bg-green-600"
+                            : "bg-red-500 hover:bg-red-600"
+                          : selectedAnswer !== null && option === correctAnswer
+                            ? "bg-green-400"
+                            : ""
+                      }`}
                   >
                     {option}
                   </Button>
