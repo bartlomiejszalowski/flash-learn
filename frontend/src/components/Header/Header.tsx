@@ -9,10 +9,11 @@ export const Header = () => {
       <nav className="flex justify-between items-center">
         <HeaderLink href="/" type="blue" label="FlashLearn" />
         <div className="space-x-4">
+          {/* create array and map over it */}
           <HeaderLink href="/features" type="black" label="Features" />
-          <HeaderLink href="/pircing" type="black" label="Pircing" />
+          <HeaderLink href="/profile" type="black" label="Profile" />
           <Button asChild>
-            <Link href="/signup">Get Started</Link>
+            <Link href="/dashboard">Get Started</Link>
           </Button>
         </div>
       </nav>

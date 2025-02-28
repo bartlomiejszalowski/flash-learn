@@ -13,10 +13,15 @@ import {
 import { Header } from "@/components/Header/Header";
 import { Collection } from "@/pages/Collection/Collection";
 import { Dashboard } from "@/pages/Dashboard/Dashboard";
+import { Features } from "@/pages/Features/Features";
 import { Landing } from "@/pages/Landing/Landing";
 import { Learn } from "@/pages/Learn/Learn";
 import { LearnModes } from "@/pages/LearnModes/LearnModes";
+import { Login } from "@/pages/Login/Login";
+import { MyCollections } from "@/pages/MyCollections/MyCollections";
 import { NotFound } from "@/pages/NotFound/NotFound";
+import { Profile } from "@/pages/Profile/Profile";
+import { Register } from "@/pages/Register/Register";
 
 export const queryClient = new QueryClient({
   queryCache: new QueryCache({
@@ -35,6 +40,18 @@ const rootRoute = createRootRouteWithContext<{ query: QueryClient }>()({
   ),
 });
 
+export const loginPage = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "login",
+  component: Login,
+});
+
+export const registerPage = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "register",
+  component: Register,
+});
+
 export const landingPage = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
@@ -49,13 +66,36 @@ export const dashboardPage = createRoute({
   // component: lazyRouteComponent(() => import("@pages/Home")),
 });
 
-export const collectionsPage = createRoute({
+export const featuresPage = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "features",
+  component: Features,
+});
+
+export const profileRootPage = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "profile",
+});
+
+export const profilePage = createRoute({
+  getParentRoute: () => profileRootPage,
+  path: "$userId",
+  component: Profile,
+});
+
+export const collectionRootPage = createRoute({
   getParentRoute: () => rootRoute,
   path: "collections",
 });
 
+export const myCollectionsPage = createRoute({
+  getParentRoute: () => collectionRootPage,
+  path: "my-collections",
+  component: MyCollections,
+});
+
 export const collectionPage = createRoute({
-  getParentRoute: () => collectionsPage,
+  getParentRoute: () => collectionRootPage,
   path: "$collectionId", // :collectionId is a dynamic parameter
   component: Collection,
 });
@@ -73,9 +113,14 @@ export const learnModePage = createRoute({
 });
 
 const routeTree = rootRoute.addChildren([
+  loginPage,
+  registerPage,
   landingPage,
   dashboardPage,
-  collectionsPage.addChildren([
+  featuresPage,
+  profileRootPage.addChildren([profilePage]),
+  collectionRootPage.addChildren([
+    myCollectionsPage,
     collectionPage.addChildren([
       learnPage.addChildren([
         learnModePage, // Handles all dynamic learning modes
