@@ -37,16 +37,35 @@ const userSchema = new mongoose.Schema(
       enum: ["male", "female"],
       required: true,
     },
-    createdCollections: [
+    userCollections: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Collection",
       },
     ],
-    learnedCollections: [
+    studyingCollections: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Collection",
+        collection: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Collection",
+          required: true,
+        },
+        progress: {
+          type: Number,
+          default: 0, // 0-100% lub liczba ukończonych trybów
+        },
+        completedModes: {
+          type: [Number], // np. [1, 3, 5] jeśli user ukończył tryby 1, 3 i 5
+          default: [],
+        },
+        startedAt: {
+          type: Date,
+          default: Date.now, // Data rozpoczęcia nauki kolekcji
+        },
+        completedAt: {
+          type: Date,
+          default: null, // Data zakończenia (null, dopóki user nie skończy)
+        },
       },
     ],
   },
