@@ -4,6 +4,7 @@ import express from "express";
 
 import { connectDB } from "./lib/db.ts";
 import authRoutes from "./routes/auth-route.ts";
+import userRoutes from "./routes/user-route.ts";
 
 dontenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.json()); // for parsing req.body
 app.use(cookieParser()); // for parsing cookies
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/vi/user", userRoutes);
 
 app.listen(PORT, () => {
   console.log(`⚡ Server is running on port ${PORT} ⚡`);

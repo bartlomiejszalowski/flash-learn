@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 // Interfejs użytkownika
-export interface IUser extends Document {
+export interface IUser {
+  _id: mongoose.Schema.Types.ObjectId;
   nickname: string;
   points: number;
   learnedWords: number;
