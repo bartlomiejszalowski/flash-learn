@@ -99,3 +99,19 @@ export const logout: RequestHandler = (req: Request, res: Response) => {
   res.clearCookie("jwt-flashLearn");
   res.status(200).json({ message: "Logout successful" });
 };
+
+export const getCurrentUser: RequestHandler = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    if (!req.user) {
+      res.status(401).json({ message: "Unauthorized" });
+      return;
+    }
+    res.json(req.user);
+  } catch (error) {
+    console.log("Error in getCurrentUser:", error.message);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};

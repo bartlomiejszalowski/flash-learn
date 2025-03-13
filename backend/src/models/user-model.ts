@@ -1,5 +1,27 @@
 import mongoose from "mongoose";
 
+// Interfejs użytkownika
+export interface IUser extends Document {
+  nickname: string;
+  points: number;
+  learnedWords: number;
+  email: string;
+  password: string;
+  profileImage: string;
+  bio: string;
+  gender: "male" | "female";
+  userCollections: mongoose.Schema.Types.ObjectId[];
+  studyingCollections: {
+    collection: mongoose.Schema.Types.ObjectId;
+    progress: number;
+    completedModes: number[];
+    startedAt: Date;
+    completedAt: Date | null;
+  }[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 const userSchema = new mongoose.Schema(
   {
     nickname: {
@@ -72,4 +94,4 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const User = mongoose.model("User", userSchema);
+export const User = mongoose.model<IUser>("User", userSchema);
