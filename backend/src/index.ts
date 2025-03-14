@@ -15,7 +15,7 @@ app.use(express.json()); // for parsing req.body
 app.use(cookieParser()); // for parsing cookies
 
 app.use("/api/v1/auth", authRoutes);
-app.use("/api/vi/user", userRoutes);
+app.use("/api/v1/user", userRoutes);
 
 app.listen(PORT, () => {
   console.log(`⚡ Server is running on port ${PORT} ⚡`);

@@ -1,5 +1,6 @@
 import { Request, RequestHandler, Response } from "express";
 
+import cloudinary from "../lib/cloudinary.ts";
 import { IUser, User } from "../models/user-model.ts";
 
 export const getPublicProfile: RequestHandler = async (
@@ -41,7 +42,12 @@ export const updateProfile: RequestHandler = async (
       }
     }
 
-    // TODO: update profile image
+    if (updatedFields.profileImage) {
+      const result = await cloudinary.uploader.upload(
+        updatedFields.profileImage
+      );
+      updatedData.profileImage = result.secure_url;
+    }
 
     const user = await User.findByIdAndUpdate(
       req.user._id,
