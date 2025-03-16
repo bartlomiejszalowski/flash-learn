@@ -9,7 +9,7 @@ import { LearningModes, modeSettings } from "./learningModeService";
 
 // Define the shape of the Zustand store
 type LearningModesStore = {
-  learningVocabulary: VocabularyType[] | null;
+  learningVocabulary: VocabularyType[] | null; // zamast tego dane przekazane do funkcji i uzywamy danych pobranych przez tanstack query
   totalVocabularyCount: number;
   currentLearningMode: LearningModes;
   currentIndex: number;
@@ -26,11 +26,11 @@ type LearningModesStore = {
   nextCard: () => void;
   prevCard: () => void;
   resetStore: (defaultMode: LearningModes) => void;
-  loadLearningVocabulary: (mode: LearningModes) => void;
+  loadLearningVocabulary: (mode: LearningModes) => void; // to samo tutaj
   setSelectedAnswer: (answer: string, mode: LearningModes) => void;
   setIsCorrect: (correct: boolean) => void;
   setProgress: (progress: number) => void;
-  generateAnswersOptions: (learningMode: LearningModes) => void;
+  generateAnswersOptions: (learningMode: LearningModes) => void; // pobierz wszytskie slowka z backendu i przelosuj je w zustandzie
   selectDontknow: (mode: LearningModes) => void;
 };
 
