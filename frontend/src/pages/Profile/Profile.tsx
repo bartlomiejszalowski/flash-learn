@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useGetAuthUser } from "@/hooks/useQueryActions";
 
 // Mock data for user profile
 const mockUserProfile = {
@@ -43,6 +44,14 @@ export const Profile = () => {
     },
   });
 
+  // dowload data by getUserData by Id from params
+  // const { authUser, isLoading } = useGetAuthUser();
+  // const {getUserProfile} = useGetAuthUser();
+
+  // console.log(authUser);
+
+  // if (!authUser) return <p>Loading...</p>;
+
   return (
     <div className="container max-w-4xl mx-auto px-4 py-8">
       <div className="mb-8 text-center">
@@ -68,7 +77,7 @@ export const Profile = () => {
             />
           </Label>
         </div>
-        <h1 className="text-3xl font-bold mt-4">{profile.name}</h1>
+        {/* <h1 className="text-3xl font-bold mt-4">{authUser.nickname}</h1> */}
         <p className="text-gray-600">Miejsce w rankingu: #{profile.rank}</p>
       </div>
 

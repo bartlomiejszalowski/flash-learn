@@ -14,3 +14,8 @@ export const registerSchema = z
     message: "Hasła muszą być identyczne",
     path: ["confirmPassword"],
   });
+
+export const loginSchema = z.object({
+  email: z.string().email("Nieprawidłowy adres e-mail"),
+  password: z.string().min(6, "Hasło musi mieć co najmniej 6 znaków"),
+});

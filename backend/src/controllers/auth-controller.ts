@@ -61,9 +61,9 @@ export const signup: RequestHandler = async (
 
 export const login: RequestHandler = async (req: Request, res: Response) => {
   try {
-    const { nickname, password } = req.body;
+    const { email, password } = req.body;
 
-    const user = await User.findOne({ nickname });
+    const user = await User.findOne({ email });
 
     if (!user) {
       res.status(404).json({ message: "User not found" });

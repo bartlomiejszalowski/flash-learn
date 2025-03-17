@@ -1,8 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/react-router";
 import { AxiosError } from "axios";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
-import { registerFn } from "@/api/auth";
+import { getAuthUserFn, loginFn, logoutFn, registerFn } from "@/api/auth";
+import { LoginCredentials } from "@/pages/Login/Login";
 
 interface ErrorResponse {
   errors?: { msg: string }[]; // Jeśli serwer zwraca tablicę błędów
@@ -11,6 +13,7 @@ interface ErrorResponse {
 
 export const useRegister = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const {
     mutate: handleRegister,
     error,
@@ -19,6 +22,7 @@ export const useRegister = () => {
     mutationFn: registerFn,
     onSuccess: () => {
       toast.success("Account created successfully");
+      navigate({ to: "/dashboard" });
       queryClient.invalidateQueries({ queryKey: ["authUser"] }); // Odświeżanie danych użytkownika
     },
     onError: (error) => {
@@ -38,4 +42,54 @@ export const useRegister = () => {
   });
 
   return { handleRegister, error, isPending };
+};
+
+export const useGetAuthUser = () => {
+  const { data: authUser, isLoading } = useQuery({
+    queryKey: ["authUser"],
+    queryFn: getAuthUserFn,
+  });
+
+  return { authUser, isLoading };
+};
+
+export const useLoginUser = () => {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const { mutate: loginUser, isPending } = useMutation<
+    void,
+    AxiosError<{ message: string }>,
+    LoginCredentials
+  >({
+    mutationFn: loginFn,
+    onSuccess: () => {
+      navigate({ to: "/dashboard" });
+      queryClient.invalidateQueries({ queryKey: ["authUser"] }); // Odświeżanie danych użytkownika
+    },
+    onError: (error) => {
+      toast.error(error.response?.data.message || "Something went wrong");
+    },
+  });
+
+  return { loginUser, isPending };
+};
+
+export const useLogout = () => {
+  const queryClient = useQueryClient();
+
+  const {
+    mutate: logoutUser,
+    isPending,
+    error,
+  } = useMutation<void, AxiosError<{ message: string }>>({
+    mutationFn: logoutFn,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["authUser"] });
+    },
+    onError: (error) => {
+      toast.error(error.response?.data?.message || "Something went wrong");
+    },
+  });
+
+  return { logoutUser, isPending, error };
 };

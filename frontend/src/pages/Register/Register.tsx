@@ -46,7 +46,6 @@ export const Register = () => {
     if (!data) return;
     handleRegister(data);
     console.log("request sent");
-    form.reset();
   });
 
   //TODO  SEPARATE EACH INPUT
