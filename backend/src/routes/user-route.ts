@@ -8,7 +8,7 @@ import { protectRoute } from "../middleware/auth-middleware.ts";
 
 const router = express.Router();
 
-router.get("/:nickname", protectRoute, getPublicProfile);
+router.get("/:userId", protectRoute, getPublicProfile);
 
 router.put("/profile", protectRoute, updateProfile);
 

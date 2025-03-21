@@ -1,12 +1,12 @@
 import { useNavigate } from "@tanstack/react-router";
 
-import { useGetAuthUser, useLogout } from "@/hooks/useQueryActions";
+import { useGetAuthUser, useLogout } from "@/hooks/useAuthQueryActions";
 
 import { Button } from "../ui/button";
 import { HeaderLink } from "./components/HeaderLink";
 
 export const Header = () => {
-  const { authUser } = useGetAuthUser();
+  const { authUser, isLoading } = useGetAuthUser();
 
   const { logoutUser } = useLogout();
 
@@ -21,6 +21,8 @@ export const Header = () => {
     }
   };
 
+  if (isLoading) return <p>Loading...</p>;
+
   return (
     <header className="container mx-auto p-4">
       <nav className="flex justify-between items-center">
@@ -28,7 +30,13 @@ export const Header = () => {
         <div className="space-x-4">
           {/* create array and map over it */}
           <HeaderLink href="/features" type="black" label="Features" />
-          <HeaderLink href="/profile" type="black" label="Profile" />
+          {authUser && (
+            <HeaderLink
+              href={`/profile/${authUser._id}`}
+              type="black"
+              label="My Profile"
+            />
+          )}
           <Button onClick={handleAuthButtonClick}>
             {authUser ? "Logout" : "Login"}
           </Button>

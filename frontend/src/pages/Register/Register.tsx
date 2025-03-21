@@ -18,7 +18,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { RegisterForm } from "@/form/forms";
 import { registerSchema } from "@/form/schema";
-import { useRegister } from "@/hooks/useQueryActions";
+import { useRegister } from "@/hooks/useAuthQueryActions";
 
 export type RegisterCredentials = {
   nickname: string;

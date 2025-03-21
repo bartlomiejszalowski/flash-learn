@@ -1,6 +1,7 @@
 import axios from "axios";
 import { toast } from "sonner";
 
+import { UserType } from "@/@Types/user";
 import { LoginCredentials } from "@/pages/Login/Login";
 import { RegisterCredentials } from "@/pages/Register/Register";
 
@@ -19,7 +20,8 @@ export const logoutFn = async () => {
 export const getAuthUserFn = async () => {
   try {
     const res = await axiosInstance.get("/auth/me");
-    return res.data;
+    const user: UserType = res.data;
+    return user;
   } catch (error: unknown) {
     // Rzutowanie na AxiosError
     if (axios.isAxiosError(error)) {

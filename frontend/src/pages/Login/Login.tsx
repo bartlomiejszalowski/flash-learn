@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { TimerIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 
@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LoginForm } from "@/form/forms";
 import { loginSchema } from "@/form/schema";
-import { useLoginUser } from "@/hooks/useQueryActions";
+import { useLoginUser } from "@/hooks/useAuthQueryActions";
 
 export type LoginCredentials = {
   email: string;
