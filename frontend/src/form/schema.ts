@@ -38,3 +38,21 @@ export const updateUserProfileSchema = z.object({
     ])
     .optional(),
 });
+
+export const createCollectionSchema = z.object({
+  name: z.string().min(1, "Nazwa kolekcji jest wymagana"),
+  description: z.string().optional(),
+  collectionImage: z
+    .union([
+      z.string(), // URL z backendu
+      z.custom<File>(
+        (file) => {
+          if (!(file instanceof File)) return false;
+          return file.size <= 5 * 1024 * 1024; // max 5MB
+        },
+        { message: "Zdjecie kolekcji musi być mniejsze niż 5MB" }
+      ),
+      z.null(),
+    ])
+    .optional(),
+});

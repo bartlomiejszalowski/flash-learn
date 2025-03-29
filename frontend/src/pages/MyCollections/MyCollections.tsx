@@ -1,9 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Book, Edit, Plus } from "lucide-react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { Controller, useForm } from "react-hook-form";
 
+import { NewCollectionType } from "@/@Types/collections";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,94 +10,44 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-
-// Schema for collection form
-const collectionSchema = z.object({
-  name: z.string().min(1, "Nazwa kolekcji jest wymagana"),
-  description: z.string().optional(),
-  image: z.instanceof(FileList).optional(),
-});
-
-// Schema for flashcard form
-const flashcardSchema = z.object({
-  polish: z.string().min(1, "Słowo po polsku jest wymagane"),
-  english: z.string().min(1, "Słowo po angielsku jest wymagane"),
-  example: z.string().optional(),
-});
-
-type CollectionFormValues = z.infer<typeof collectionSchema>;
-type FlashcardFormValues = z.infer<typeof flashcardSchema>;
-
-// Mock data for existing collections
-const mockCollections = [
-  {
-    id: 1,
-    name: "Podstawowe słownictwo",
-    cardCount: 50,
-    image: "/placeholder.svg",
-  },
-  {
-    id: 2,
-    name: "Czasowniki nieregularne",
-    cardCount: 30,
-    image: "/placeholder.svg",
-  },
-  { id: 3, name: "Idiomy", cardCount: 25, image: "/placeholder.svg" },
-];
+import { CreateCollectionForm } from "@/form/forms";
+import { createCollectionSchema } from "@/form/schema";
+import { useCreateCollection } from "@/hooks/useCollectionQueryActions";
+import { fileToBase64 } from "@/utils/fileToBase64";
 
 export const MyCollections = () => {
-  const [collections, setCollections] = useState(mockCollections);
-  const [isAddFlashcardModalOpen, setIsAddFlashcardModalOpen] = useState(false);
-  const [selectedCollection, setSelectedCollection] = useState<number | null>(
-    null
-  );
-
-  const {
-    register: registerCollection,
-    handleSubmit: handleSubmitCollection,
-    formState: { errors: collectionErrors },
-  } = useForm<CollectionFormValues>({
-    resolver: zodResolver(collectionSchema),
+  const form = useForm<CreateCollectionForm>({
+    resolver: zodResolver(createCollectionSchema),
+    defaultValues: {
+      name: "",
+      description: "",
+      collectionImage: null, // File | string | null
+    },
   });
 
-  const {
-    register: registerFlashcard,
-    handleSubmit: handleSubmitFlashcard,
-    formState: { errors: flashcardErrors },
-  } = useForm<FlashcardFormValues>({
-    resolver: zodResolver(flashcardSchema),
-  });
+  const { createCollection } = useCreateCollection();
 
-  const onSubmitCollection = (data: CollectionFormValues) => {
-    // Handle collection creation logic here
-    console.log("New collection:", data);
-    const newCollection = {
-      id: collections.length + 1,
+  const handleFormSubmit = form.handleSubmit(async (data) => {
+    let collectionImage: string | null = null;
+
+    if (data.collectionImage instanceof File) {
+      // Konwersja pliku do base64
+      collectionImage = await fileToBase64(data.collectionImage);
+    }
+
+    const payload: NewCollectionType = {
       name: data.name,
-      cardCount: 0,
-      image:
-        data.image && data.image[0]
-          ? URL.createObjectURL(data.image[0])
-          : "/placeholder.svg",
+      description: data.description,
+      collectionImage, // base64 lub null / string (jeśli zostaje z backendu)
     };
-    setCollections([...collections, newCollection]);
-  };
 
-  const onSubmitFlashcard = (data: FlashcardFormValues) => {
-    // Handle flashcard creation logic here
-    console.log("New flashcard for collection", selectedCollection, ":", data);
-    setIsAddFlashcardModalOpen(false);
-  };
+    console.log(payload);
+    createCollection(payload);
+  });
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -112,42 +60,63 @@ export const MyCollections = () => {
           <CardDescription>Stwórz nową kolekcję fiszek</CardDescription>
         </CardHeader>
         <CardContent>
-          <form
-            onSubmit={handleSubmitCollection(onSubmitCollection)}
-            className="space-y-4"
-          >
-            <div>
-              <Label htmlFor="name">Nazwa kolekcji</Label>
-              <Input id="name" {...registerCollection("name")} />
-              {collectionErrors.name && (
-                <p className="text-red-500 text-sm">
-                  {collectionErrors.name.message}
-                </p>
-              )}
-            </div>
-            <div>
-              <Label htmlFor="description">Opis (opcjonalnie)</Label>
-              <Textarea
-                id="description"
-                {...registerCollection("description")}
-              />
-            </div>
-            <div>
-              <Label htmlFor="image">Zdjęcie (opcjonalnie)</Label>
-              <Input
-                id="image"
-                type="file"
-                accept="image/*"
-                {...registerCollection("image")}
-              />
-            </div>
-            <Button type="submit">Dodaj kolekcję</Button>
-          </form>
+          <Form {...form}>
+            <form onSubmit={handleFormSubmit} className="space-y-4">
+              {/* Name Field */}
+              <div>
+                <Label htmlFor="name">Nazwa kolekcji</Label>
+                <Controller
+                  name="name"
+                  control={form.control}
+                  render={({ field }) => <Input id="name" {...field} />}
+                />
+                {form.formState.errors.name && (
+                  <p className="text-red-500 text-sm">
+                    {form.formState.errors.name.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Description Field */}
+              <div>
+                <Label htmlFor="description">Opis (opcjonalnie)</Label>
+                <Controller
+                  name="description"
+                  control={form.control}
+                  render={({ field }) => (
+                    <Textarea id="description" {...field} />
+                  )}
+                />
+              </div>
+
+              {/* File Upload Field */}
+              <div>
+                <Label htmlFor="collectionImage">Zdjęcie (opcjonalnie)</Label>
+                <Controller
+                  name="collectionImage"
+                  control={form.control}
+                  render={({ field: { onChange } }) => (
+                    <Input
+                      id="collectionImage"
+                      type="file"
+                      accept="image/*"
+                      multiple={false}
+                      onChange={(e) => {
+                        const file = e.target.files?.[0] || null;
+                        onChange(file);
+                      }}
+                    />
+                  )}
+                />
+              </div>
+              <Button type="submit">Dodaj kolekcję</Button>
+            </form>
+          </Form>
         </CardContent>
       </Card>
 
       {/* Existing collections */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {collections.map((collection) => (
           <Card key={collection.id}>
             <CardHeader>
@@ -183,10 +152,10 @@ export const MyCollections = () => {
             </CardContent>
           </Card>
         ))}
-      </div>
+      </div> */}
 
       {/* Add flashcard modal */}
-      <Dialog
+      {/* <Dialog
         open={isAddFlashcardModalOpen}
         onOpenChange={setIsAddFlashcardModalOpen}
       >
@@ -226,7 +195,7 @@ export const MyCollections = () => {
             <Button type="submit">Dodaj fiszkę</Button>
           </form>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </div>
   );
 };

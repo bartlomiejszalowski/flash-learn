@@ -26,7 +26,9 @@ import {
   useUpdateUserProfile,
 } from "@/hooks/useUserQueryActions";
 import { profilePage } from "@/router/router";
+import { fileToBase64 } from "@/utils/fileToBase64";
 
+//  REFACTOR HERE NEEDED
 export const Profile = () => {
   const [isAvatarHovered, setIsAvatarHovered] = useState(false);
 
@@ -45,24 +47,6 @@ export const Profile = () => {
       profileImage: null, // File | string | null
     },
   });
-
-  const fileToBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-
-      reader.readAsDataURL(file);
-
-      reader.onload = () => {
-        if (typeof reader.result === "string") {
-          resolve(reader.result);
-        } else {
-          reject(new Error("File conversion failed"));
-        }
-      };
-
-      reader.onerror = (error) => reject(error);
-    });
-  };
 
   const handleFormSubmit = form.handleSubmit(async (data) => {
     let profileImage: string | null = null;
