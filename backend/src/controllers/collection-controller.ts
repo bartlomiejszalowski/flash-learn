@@ -2,6 +2,7 @@ import { Request, RequestHandler, Response } from "express";
 
 import cloudinary from "../lib/cloudinary.ts";
 import { Collection } from "../models/collection-model.ts";
+import { User } from "../models/user-model.ts";
 
 export const createCollection: RequestHandler = async (
   req: Request,
@@ -30,6 +31,14 @@ export const createCollection: RequestHandler = async (
     }
 
     await newCollection.save();
+
+    // 👉 Dodaj kolekcję do użytkownika (jeśli model User ma collections[])
+    await User.findByIdAndUpdate(
+      req.user._id,
+      { $push: { userCollections: newCollection._id } },
+      { new: true }
+    );
+
     res.status(201).json(newCollection);
   } catch (error) {
     console.log("Error creating collection:", error);

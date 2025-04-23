@@ -11,3 +11,8 @@ export const createCollectionFn = async (collectionData: NewCollectionType) => {
   const res = await axiosInstance.post("/collections/create", collectionData);
   return res.data;
 };
+
+export const getUserCollectionsFn = async () => {
+  const res = await axiosInstance.get("/collections/user-collections");
+  return res.data;
+};

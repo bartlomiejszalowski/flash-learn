@@ -1,9 +1,9 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { toast } from "sonner";
 
 import { NewCollectionType } from "@/@Types/collections";
-import { createCollectionFn } from "@/api/collection";
+import { createCollectionFn, getUserCollectionsFn } from "@/api/collection";
 
 export const useCreateCollection = () => {
   const queryClient = useQueryClient();
@@ -23,4 +23,13 @@ export const useCreateCollection = () => {
   });
 
   return { createCollection, error, isPending };
+};
+
+export const useGetUserCollections = () => {
+  const { data: userCollections, isLoading } = useQuery({
+    queryKey: ["userCollections"],
+    queryFn: getUserCollectionsFn,
+  });
+
+  return { userCollections, isLoading };
 };

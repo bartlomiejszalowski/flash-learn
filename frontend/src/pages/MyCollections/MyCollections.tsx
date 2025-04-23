@@ -16,8 +16,19 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { CreateCollectionForm } from "@/form/forms";
 import { createCollectionSchema } from "@/form/schema";
-import { useCreateCollection } from "@/hooks/useCollectionQueryActions";
+import {
+  useCreateCollection,
+  useGetUserCollections,
+} from "@/hooks/useCollectionQueryActions";
 import { fileToBase64 } from "@/utils/fileToBase64";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { CollectionType } from "@/@Types/general";
 
 export const MyCollections = () => {
   const form = useForm<CreateCollectionForm>({
@@ -30,6 +41,10 @@ export const MyCollections = () => {
   });
 
   const { createCollection } = useCreateCollection();
+
+  const { userCollections, isLoading } = useGetUserCollections();
+
+  console.log(userCollections);
 
   const handleFormSubmit = form.handleSubmit(async (data) => {
     let collectionImage: string | null = null;
@@ -116,8 +131,10 @@ export const MyCollections = () => {
       </Card>
 
       {/* Existing collections */}
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {collections.map((collection) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {userCollections.map((collection: CollectionType) => (
+          // Todo dokonczyc tutaj !!!!
+
           <Card key={collection.id}>
             <CardHeader>
               <CardTitle className="flex items-center justify-between">
@@ -152,10 +169,10 @@ export const MyCollections = () => {
             </CardContent>
           </Card>
         ))}
-      </div> */}
+      </div>
 
       {/* Add flashcard modal */}
-      {/* <Dialog
+      <Dialog
         open={isAddFlashcardModalOpen}
         onOpenChange={setIsAddFlashcardModalOpen}
       >
@@ -195,7 +212,7 @@ export const MyCollections = () => {
             <Button type="submit">Dodaj fiszkę</Button>
           </form>
         </DialogContent>
-      </Dialog> */}
+      </Dialog>
     </div>
   );
 };
